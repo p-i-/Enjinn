@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A309BB9813814C0600E8E748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BB9713814C0600E8E748 /* UIKit.framework */; };
+		A309BB9A13814C0600E8E748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BB9913814C0600E8E748 /* Foundation.framework */; };
+		A309BB9C13814C0600E8E748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BB9B13814C0600E8E748 /* CoreGraphics.framework */; };
+		A309BBA213814C0600E8E748 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A309BBA013814C0600E8E748 /* InfoPlist.strings */; };
+		A309BBA513814C0600E8E748 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBA413814C0600E8E748 /* main.m */; };
+		A309BBA813814C0600E8E748 /* GLEngineAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBA713814C0600E8E748 /* GLEngineAppDelegate.m */; };
+		A309BBAB13814C0600E8E748 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309BBA913814C0600E8E748 /* MainWindow.xib */; };
+		A309BBAE13814C0600E8E748 /* GLEngineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBAD13814C0600E8E748 /* GLEngineViewController.m */; };
+		A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309BBAF13814C0600E8E748 /* GLEngineViewController.xib */; };
+		A309BBB913814C7700E8E748 /* CustomGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBB813814C7700E8E748 /* CustomGLView.m */; };
+		A309BBC11381501E00E8E748 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBBC1381501E00E8E748 /* GLView.m */; };
+		A309BBC21381501E00E8E748 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBBE1381501E00E8E748 /* GLProgram.m */; };
+		A309BBC31381501E00E8E748 /* ShaderAux.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBC01381501E00E8E748 /* ShaderAux.m */; };
+		A309BBC91381521B00E8E748 /* glHelper.c in Sources */ = {isa = PBXBuildFile; fileRef = A309BBC81381521B00E8E748 /* glHelper.c */; };
+		A309BBF0138158DD00E8E748 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BBEF138158DD00E8E748 /* QuartzCore.framework */; };
+		A309BBF2138158F400E8E748 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BBF1138158F400E8E748 /* OpenGLES.framework */; };
+		A319EAA813817191001EBE6B /* Shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A309BBF3138159A500E8E748 /* Shader.vert */; };
+		A319EAA913817191001EBE6B /* Shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A309BBF4138159A500E8E748 /* Shader.frag */; };
+		A31C35F213828D2500ADFC89 /* Indent.m in Sources */ = {isa = PBXBuildFile; fileRef = A31C35F113828D2300ADFC89 /* Indent.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A309BB9313814C0600E8E748 /* GLEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A309BB9713814C0600E8E748 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A309BB9913814C0600E8E748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A309BB9B13814C0600E8E748 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A309BB9F13814C0600E8E748 /* GLEngine-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GLEngine-Info.plist"; path = "GLEngine/GLEngine-Info.plist"; sourceTree = "<group>"; };
+		A309BBA113814C0600E8E748 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A309BBA313814C0600E8E748 /* GLEngine-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLEngine-Prefix.pch"; sourceTree = "<group>"; };
+		A309BBA413814C0600E8E748 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A309BBA613814C0600E8E748 /* GLEngineAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLEngineAppDelegate.h; sourceTree = "<group>"; };
+		A309BBA713814C0600E8E748 /* GLEngineAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLEngineAppDelegate.m; sourceTree = "<group>"; };
+		A309BBAA13814C0600E8E748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		A309BBAC13814C0600E8E748 /* GLEngineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLEngineViewController.h; sourceTree = "<group>"; };
+		A309BBAD13814C0600E8E748 /* GLEngineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLEngineViewController.m; sourceTree = "<group>"; };
+		A309BBB013814C0600E8E748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GLEngineViewController.xib; sourceTree = "<group>"; };
+		A309BBB713814C7700E8E748 /* CustomGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGLView.h; sourceTree = "<group>"; };
+		A309BBB813814C7700E8E748 /* CustomGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGLView.m; sourceTree = "<group>"; };
+		A309BBBA1381501E00E8E748 /* GLViewBits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLViewBits.h; sourceTree = "<group>"; };
+		A309BBBB1381501E00E8E748 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		A309BBBC1381501E00E8E748 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
+		A309BBBD1381501E00E8E748 /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
+		A309BBBE1381501E00E8E748 /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
+		A309BBBF1381501E00E8E748 /* ShaderAux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderAux.h; sourceTree = "<group>"; };
+		A309BBC01381501E00E8E748 /* ShaderAux.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderAux.m; sourceTree = "<group>"; };
+		A309BBC71381521B00E8E748 /* glHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glHelper.h; sourceTree = "<group>"; };
+		A309BBC81381521B00E8E748 /* glHelper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glHelper.c; sourceTree = "<group>"; };
+		A309BBEF138158DD00E8E748 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A309BBF1138158F400E8E748 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		A309BBF3138159A500E8E748 /* Shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vert; sourceTree = "<group>"; };
+		A309BBF4138159A500E8E748 /* Shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.frag; sourceTree = "<group>"; };
+		A31C35F013828D2200ADFC89 /* Indent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indent.h; sourceTree = "<group>"; };
+		A31C35F113828D2300ADFC89 /* Indent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indent.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A309BB9013814C0600E8E748 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A309BBF2138158F400E8E748 /* OpenGLES.framework in Frameworks */,
+				A309BBF0138158DD00E8E748 /* QuartzCore.framework in Frameworks */,
+				A309BB9813814C0600E8E748 /* UIKit.framework in Frameworks */,
+				A309BB9A13814C0600E8E748 /* Foundation.framework in Frameworks */,
+				A309BB9C13814C0600E8E748 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A309BB8813814C0500E8E748 = {
+			isa = PBXGroup;
+			children = (
+				A309BB9F13814C0600E8E748 /* GLEngine-Info.plist */,
+				A309BBA013814C0600E8E748 /* InfoPlist.strings */,
+				A309BB9D13814C0600E8E748 /* GLEngine */,
+				A309BB9613814C0600E8E748 /* Frameworks */,
+				A309BB9413814C0600E8E748 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A309BB9413814C0600E8E748 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A309BB9313814C0600E8E748 /* GLEngine.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A309BB9613814C0600E8E748 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A309BBF1138158F400E8E748 /* OpenGLES.framework */,
+				A309BBEF138158DD00E8E748 /* QuartzCore.framework */,
+				A31C35EF138280F200ADFC89 /* DefaultTemplate */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A309BB9D13814C0600E8E748 /* GLEngine */ = {
+			isa = PBXGroup;
+			children = (
+				A31C35EE1382808200ADFC89 /* BoilerPlate */,
+				A309BBB713814C7700E8E748 /* CustomGLView.h */,
+				A309BBB813814C7700E8E748 /* CustomGLView.m */,
+				A309BBF7138159A900E8E748 /* Shaders */,
+				A309BBC61381520300E8E748 /* Lib */,
+			);
+			path = GLEngine;
+			sourceTree = "<group>";
+		};
+		A309BBC41381502600E8E748 /* GLView */ = {
+			isa = PBXGroup;
+			children = (
+				A309BBBB1381501E00E8E748 /* GLView.h */,
+				A309BBBA1381501E00E8E748 /* GLViewBits.h */,
+				A309BBC51381504200E8E748 /* Internals */,
+			);
+			name = GLView;
+			sourceTree = "<group>";
+		};
+		A309BBC51381504200E8E748 /* Internals */ = {
+			isa = PBXGroup;
+			children = (
+				A309BBBC1381501E00E8E748 /* GLView.m */,
+				A309BBBD1381501E00E8E748 /* GLProgram.h */,
+				A309BBBE1381501E00E8E748 /* GLProgram.m */,
+				A309BBBF1381501E00E8E748 /* ShaderAux.h */,
+				A309BBC01381501E00E8E748 /* ShaderAux.m */,
+			);
+			name = Internals;
+			sourceTree = "<group>";
+		};
+		A309BBC61381520300E8E748 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				A309BBC41381502600E8E748 /* GLView */,
+				A309BBC71381521B00E8E748 /* glHelper.h */,
+				A309BBC81381521B00E8E748 /* glHelper.c */,
+				A31C35F013828D2200ADFC89 /* Indent.h */,
+				A31C35F113828D2300ADFC89 /* Indent.m */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		A309BBF7138159A900E8E748 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				A309BBF3138159A500E8E748 /* Shader.vert */,
+				A309BBF4138159A500E8E748 /* Shader.frag */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		A31C35EE1382808200ADFC89 /* BoilerPlate */ = {
+			isa = PBXGroup;
+			children = (
+				A309BBA313814C0600E8E748 /* GLEngine-Prefix.pch */,
+				A309BBA413814C0600E8E748 /* main.m */,
+				A309BBA613814C0600E8E748 /* GLEngineAppDelegate.h */,
+				A309BBA713814C0600E8E748 /* GLEngineAppDelegate.m */,
+				A309BBA913814C0600E8E748 /* MainWindow.xib */,
+				A309BBAC13814C0600E8E748 /* GLEngineViewController.h */,
+				A309BBAD13814C0600E8E748 /* GLEngineViewController.m */,
+				A309BBAF13814C0600E8E748 /* GLEngineViewController.xib */,
+			);
+			name = BoilerPlate;
+			sourceTree = "<group>";
+		};
+		A31C35EF138280F200ADFC89 /* DefaultTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				A309BB9713814C0600E8E748 /* UIKit.framework */,
+				A309BB9913814C0600E8E748 /* Foundation.framework */,
+				A309BB9B13814C0600E8E748 /* CoreGraphics.framework */,
+			);
+			name = DefaultTemplate;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A309BB9213814C0600E8E748 /* GLEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A309BBB413814C0600E8E748 /* Build configuration list for PBXNativeTarget "GLEngine" */;
+			buildPhases = (
+				A309BB8F13814C0600E8E748 /* Sources */,
+				A309BB9013814C0600E8E748 /* Frameworks */,
+				A309BB9113814C0600E8E748 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GLEngine;
+			productName = GLEngine;
+			productReference = A309BB9313814C0600E8E748 /* GLEngine.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A309BB8A13814C0500E8E748 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Pi;
+			};
+			buildConfigurationList = A309BB8D13814C0500E8E748 /* Build configuration list for PBXProject "GLEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A309BB8813814C0500E8E748;
+			productRefGroup = A309BB9413814C0600E8E748 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A309BB9213814C0600E8E748 /* GLEngine */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A309BB9113814C0600E8E748 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A319EAA813817191001EBE6B /* Shader.vert in Resources */,
+				A319EAA913817191001EBE6B /* Shader.frag in Resources */,
+				A309BBA213814C0600E8E748 /* InfoPlist.strings in Resources */,
+				A309BBAB13814C0600E8E748 /* MainWindow.xib in Resources */,
+				A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A309BB8F13814C0600E8E748 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A309BBA513814C0600E8E748 /* main.m in Sources */,
+				A309BBA813814C0600E8E748 /* GLEngineAppDelegate.m in Sources */,
+				A309BBAE13814C0600E8E748 /* GLEngineViewController.m in Sources */,
+				A309BBB913814C7700E8E748 /* CustomGLView.m in Sources */,
+				A309BBC11381501E00E8E748 /* GLView.m in Sources */,
+				A309BBC21381501E00E8E748 /* GLProgram.m in Sources */,
+				A309BBC31381501E00E8E748 /* ShaderAux.m in Sources */,
+				A309BBC91381521B00E8E748 /* glHelper.c in Sources */,
+				A31C35F213828D2500ADFC89 /* Indent.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A309BBA013814C0600E8E748 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A309BBA113814C0600E8E748 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = GLEngine;
+			sourceTree = "<group>";
+		};
+		A309BBA913814C0600E8E748 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A309BBAA13814C0600E8E748 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		A309BBAF13814C0600E8E748 /* GLEngineViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A309BBB013814C0600E8E748 /* en */,
+			);
+			name = GLEngineViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A309BBB213814C0600E8E748 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A309BBB313814C0600E8E748 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		A309BBB513814C0600E8E748 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GLEngine/GLEngine-Prefix.pch";
+				INFOPLIST_FILE = "GLEngine/GLEngine-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A309BBB613814C0600E8E748 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GLEngine/GLEngine-Prefix.pch";
+				INFOPLIST_FILE = "GLEngine/GLEngine-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A309BB8D13814C0500E8E748 /* Build configuration list for PBXProject "GLEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A309BBB213814C0600E8E748 /* Debug */,
+				A309BBB313814C0600E8E748 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A309BBB413814C0600E8E748 /* Build configuration list for PBXNativeTarget "GLEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A309BBB513814C0600E8E748 /* Debug */,
+				A309BBB613814C0600E8E748 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A309BB8A13814C0500E8E748 /* Project object */;
+}
