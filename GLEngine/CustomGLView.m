@@ -80,14 +80,14 @@
             {
                 GLuint texId_gem;
                 
-                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
-                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
-                
-                [GLTexture  createGLTextureFromImage:              gem
-                                            POTWidth: (GLuint)     1024
-                                           POTHeight: (GLuint)     1024
-                                              inSlot:              GL_TEXTURE1 // shader will want slot 0 later
-                                      returningTexId:              & texId_gem ];
+//                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
+//                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
+//                
+//                [GLTexture  createGLTextureFromImage:              gem
+//                                            POTWidth: (GLuint)     1024
+//                                           POTHeight: (GLuint)     1024
+//                                              inSlot:              GL_TEXTURE1 // shader will want slot 0 later
+//                                      returningTexId:              & texId_gem ];
 
                 // blur gem texture onto test-texture
                 [Blurrer  blurTexture:              texId_gem
