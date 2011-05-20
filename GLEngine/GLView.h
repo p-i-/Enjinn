@@ -8,7 +8,7 @@
 
 #import "GLViewBits.h" // renderProtocol, ATTRIBUTE
 
-@class GLProgram;
+@class Program;
 @class EAGLContext;
 
 @interface GLView : UIView <GLViewCallbacks> 

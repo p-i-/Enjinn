@@ -10,6 +10,13 @@
 
 //  A T T R I B U T E S  &  U N I F O R M S
 
+typedef struct { GLfloat x,y; } GLVecXY;
+typedef struct { GLfloat s,t; } GLVecST;
+typedef struct { GLfloat r,g,b,a; } GLVecRGBA;
+typedef union { 
+    struct { GLfloat x, y, s, t, r, g, b, a; };
+	struct { GLVecXY xy; GLVecST st; GLVecRGBA rgba; };  } VERTEX_XY_ST_RGBA;
+
 enum 
 {
     U0_MATRIX
@@ -23,17 +30,10 @@ enum
     ATTRIBUTE_COUNT
 };
 
-typedef struct { GLfloat x,y; } GLVecXY;
-typedef struct { GLfloat s,t; } GLVecST;
-typedef struct { GLfloat r,g,b,a; } GLVecRGBA;
-typedef union { 
-    struct { GLfloat x, y, s, t, r, g, b, a; };
-	struct { GLVecXY xy; GLVecST st; GLVecRGBA rgba; };  } VERTEX_XY_ST_RGBA;
-
 //  - - - 
 
 @interface CustomGLView : GLView {
-    GLuint texId_XORPattern;
+    GLuint texId_test;
     ATTRIBUTE* atts;
     char** unifs;
 }

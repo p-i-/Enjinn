@@ -11,7 +11,7 @@
 #import "glHelper.h"
 
 #import "GLView.h"
-#import "GLProgram.h"
+#import "Program.h"
 
 @interface GLView( )
 
@@ -19,7 +19,7 @@
 - (BOOL) resizeFromLayer:   (CAEAGLLayer *)     layer;
 
 @property (nonatomic, retain) CADisplayLink*    displayLink;
-@property (nonatomic, retain) GLProgram*        program;
+@property (nonatomic, retain) Program*        program;
 
 @end
 
@@ -57,8 +57,8 @@
 {	
     self.multipleTouchEnabled = YES;
     
-    [Indent log: @"GLView: setupContextAndFBOs..."];
-    [Indent inc];
+    LOG( @"GLView: setupContextAndFBOs..." );
+    [PiLog indent];
           
     // Setup drawing surface properties
     {
@@ -82,7 +82,7 @@
         BOOL ok = [EAGLContext setCurrentContext: context];
         NSAssert( ok, @"setCurrentContext failed! \n" );
         
-        [Indent log: @"...EAGLContext created!"];
+        LOG( @"...EAGLContext created!" );
     }
     
     
@@ -115,10 +115,10 @@
     {
         GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER) ;
         NSAssert( status == GL_FRAMEBUFFER_COMPLETE, @"failed to make complete framebuffer object %x", status);
-        [Indent log: [NSString stringWithFormat: @"...completed @ %d x %d", backingWidth, backingHeight ] ];
+        LOG( @"...completed @ %d x %d", backingWidth, backingHeight );
     }
     
-    [Indent dec];
+    [PiLog outdent];
 }
 
 
@@ -126,26 +126,35 @@
                      attributes: ( ATTRIBUTE [] )   in_attributeArray
                        uniforms: ( char* [] )       in_uniformArray
 {
-    [Indent log: @"GLView: setupProgramWithShader:attributes:uniforms:" ];
-    [Indent inc];
+    LOG( @"GLView: setupProgramWithShader:attributes:uniforms:" );
+    [PiLog indent];
 
-    NSAssert( glCheckFramebufferStatus( GL_FRAMEBUFFER ) == GL_FRAMEBUFFER_COMPLETE, @"Failed to make complete framebuffer object: Make sure you got the order right." );
+    self.program = [Program program];
     
-    // calls glCreateProgram();
-    self.program = [GLProgram program];
-        
-    // load shaders, bind attributes, compile shaders, link shaders, validate program, delete shaders
-    [program loadShadersCompileAndLink: in_shaderFilename
-                     bindingAttributes: in_attributeArray ];
+    [program setupProgramWithShader: in_shaderFilename
+                         attributes: in_attributeArray
+                           uniforms: in_uniformArray ];
+    //[program use];
     
-    // creates & fills an internal 'GLUint uniformIds[]' array
-    [program processUniformArray: in_uniformArray];
-    
-    [program use];
-    
-    [Indent dec];
+    [PiLog outdent];
 }
-
+//    NSAssert( glCheckFramebufferStatus( GL_FRAMEBUFFER ) == GL_FRAMEBUFFER_COMPLETE, @"Failed to make complete framebuffer object: Make sure you got the order right." );
+//    
+//    // calls glCreateProgram();
+//    self.program = [Program program];
+//        
+//    // load shaders, bind attributes, compile shaders, link shaders, validate program, delete shaders
+//    [program loadShadersCompileAndLink: in_shaderFilename
+//                     bindingAttributes: in_attributeArray ];
+//    
+//    // creates & fills an internal 'GLUint uniformIds[]' array
+//    [program processUniformArray: in_uniformArray];
+//    
+//    [program use];
+//    
+//    [PiLog outdent];
+//}
+//
 
 - (void) setupVertexArrayPointers: ( ATTRIBUTE [] ) in_attributeArray
 {
@@ -153,7 +162,7 @@
     //       before glEnableVertexAttribArray(...) and glVertexAttribPointer(...)  
     //       ie WHICH vertex-buffer are we working on / structuring?
     
-    [Indent log: @"GLView: setupVertexArrayPointers:" ];
+    LOG( @"GLView: setupVertexArrayPointers:" );
     
     GLuint tqVert_BufID;
     glGenBuffers( 1, & tqVert_BufID ); 
@@ -204,7 +213,7 @@
 
 - (void) startDrawing
 {
-    [Indent log: @"GLView: startDrawing..." ];
+    LOG( @"GLView: startDrawing..." );
     
     NSAssert( displayLink == NULL, @"ERROR: startDrawing" );
     self.displayLink = [CADisplayLink displayLinkWithTarget: self 
@@ -242,7 +251,7 @@
 
 - (BOOL) resizeFromLayer: (CAEAGLLayer *) layer
 {     
-    [Indent log: @"GLView: resizeFromLayer..." ];
+    LOG( @"GLView: resizeFromLayer..." );
     
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
 	

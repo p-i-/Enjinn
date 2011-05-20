@@ -18,14 +18,16 @@
 		A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A309BBAF13814C0600E8E748 /* GLEngineViewController.xib */; };
 		A309BBB913814C7700E8E748 /* CustomGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBB813814C7700E8E748 /* CustomGLView.m */; };
 		A309BBC11381501E00E8E748 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBBC1381501E00E8E748 /* GLView.m */; };
-		A309BBC21381501E00E8E748 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBBE1381501E00E8E748 /* GLProgram.m */; };
-		A309BBC31381501E00E8E748 /* ShaderAux.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBC01381501E00E8E748 /* ShaderAux.m */; };
+		A309BBC21381501E00E8E748 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBBE1381501E00E8E748 /* Program.m */; };
+		A309BBC31381501E00E8E748 /* ProgramHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A309BBC01381501E00E8E748 /* ProgramHelper.m */; };
 		A309BBC91381521B00E8E748 /* glHelper.c in Sources */ = {isa = PBXBuildFile; fileRef = A309BBC81381521B00E8E748 /* glHelper.c */; };
 		A309BBF0138158DD00E8E748 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BBEF138158DD00E8E748 /* QuartzCore.framework */; };
 		A309BBF2138158F400E8E748 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BBF1138158F400E8E748 /* OpenGLES.framework */; };
-		A319EAA813817191001EBE6B /* Shader.vert in Resources */ = {isa = PBXBuildFile; fileRef = A309BBF3138159A500E8E748 /* Shader.vert */; };
-		A319EAA913817191001EBE6B /* Shader.frag in Resources */ = {isa = PBXBuildFile; fileRef = A309BBF4138159A500E8E748 /* Shader.frag */; };
-		A31C35F213828D2500ADFC89 /* Indent.m in Sources */ = {isa = PBXBuildFile; fileRef = A31C35F113828D2300ADFC89 /* Indent.m */; };
+		A31C35F213828D2500ADFC89 /* PiLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A31C35F113828D2300ADFC89 /* PiLog.m */; };
+		A33A5A06138579EC00275FA0 /* GLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = A33A5A05138579EC00275FA0 /* GLTexture.m */; };
+		A37BB1CD13862B3F00BB0821 /* gem_glow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1CB13862B3F00BB0821 /* gem_glow.jpg */; };
+		A37BB1CE13862B3F00BB0821 /* gem.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1CC13862B3F00BB0821 /* gem.jpg */; };
+		A37BB1DC1386479400BB0821 /* Blurrer.m in Sources */ = {isa = PBXBuildFile; fileRef = A37BB1DB1386479400BB0821 /* Blurrer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,18 +50,27 @@
 		A309BBBA1381501E00E8E748 /* GLViewBits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLViewBits.h; sourceTree = "<group>"; };
 		A309BBBB1381501E00E8E748 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		A309BBBC1381501E00E8E748 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
-		A309BBBD1381501E00E8E748 /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
-		A309BBBE1381501E00E8E748 /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
-		A309BBBF1381501E00E8E748 /* ShaderAux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderAux.h; sourceTree = "<group>"; };
-		A309BBC01381501E00E8E748 /* ShaderAux.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderAux.m; sourceTree = "<group>"; };
+		A309BBBD1381501E00E8E748 /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Program.h; sourceTree = "<group>"; };
+		A309BBBE1381501E00E8E748 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
+		A309BBBF1381501E00E8E748 /* ProgramHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramHelper.h; sourceTree = "<group>"; };
+		A309BBC01381501E00E8E748 /* ProgramHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramHelper.m; sourceTree = "<group>"; };
 		A309BBC71381521B00E8E748 /* glHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glHelper.h; sourceTree = "<group>"; };
 		A309BBC81381521B00E8E748 /* glHelper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glHelper.c; sourceTree = "<group>"; };
 		A309BBEF138158DD00E8E748 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A309BBF1138158F400E8E748 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		A309BBF3138159A500E8E748 /* Shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vert; sourceTree = "<group>"; };
-		A309BBF4138159A500E8E748 /* Shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.frag; sourceTree = "<group>"; };
-		A31C35F013828D2200ADFC89 /* Indent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indent.h; sourceTree = "<group>"; };
-		A31C35F113828D2300ADFC89 /* Indent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indent.m; sourceTree = "<group>"; };
+		A31C35F013828D2200ADFC89 /* PiLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiLog.h; sourceTree = "<group>"; };
+		A31C35F113828D2300ADFC89 /* PiLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiLog.m; sourceTree = "<group>"; };
+		A33A5A04138579EC00275FA0 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
+		A33A5A05138579EC00275FA0 /* GLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTexture.m; sourceTree = "<group>"; };
+		A37BB1C713862B2B00BB0821 /* Shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.frag; path = Resources/Shader.frag; sourceTree = "<group>"; };
+		A37BB1C813862B2B00BB0821 /* Shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vert; path = Resources/Shader.vert; sourceTree = "<group>"; };
+		A37BB1CB13862B3F00BB0821 /* gem_glow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gem_glow.jpg; path = Resources/gem_glow.jpg; sourceTree = "<group>"; };
+		A37BB1CC13862B3F00BB0821 /* gem.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gem.jpg; path = Resources/gem.jpg; sourceTree = "<group>"; };
+		A37BB1D71386407F00BB0821 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		A37BB1DA1386479300BB0821 /* Blurrer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blurrer.h; sourceTree = "<group>"; };
+		A37BB1DB1386479400BB0821 /* Blurrer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Blurrer.m; sourceTree = "<group>"; };
+		A37BB1E813865C5600BB0821 /* Blurrer.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Blurrer.frag; sourceTree = "<group>"; };
+		A37BB1E913865C5600BB0821 /* Blurrer.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Blurrer.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +92,9 @@
 		A309BB8813814C0500E8E748 = {
 			isa = PBXGroup;
 			children = (
-				A309BB9F13814C0600E8E748 /* GLEngine-Info.plist */,
-				A309BBA013814C0600E8E748 /* InfoPlist.strings */,
+				A37BB1D71386407F00BB0821 /* README */,
 				A309BB9D13814C0600E8E748 /* GLEngine */,
+				A37BB1C613862A8800BB0821 /* Resources */,
 				A309BB9613814C0600E8E748 /* Frameworks */,
 				A309BB9413814C0600E8E748 /* Products */,
 			);
@@ -113,7 +124,6 @@
 				A31C35EE1382808200ADFC89 /* BoilerPlate */,
 				A309BBB713814C7700E8E748 /* CustomGLView.h */,
 				A309BBB813814C7700E8E748 /* CustomGLView.m */,
-				A309BBF7138159A900E8E748 /* Shaders */,
 				A309BBC61381520300E8E748 /* Lib */,
 			);
 			path = GLEngine;
@@ -133,10 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				A309BBBC1381501E00E8E748 /* GLView.m */,
-				A309BBBD1381501E00E8E748 /* GLProgram.h */,
-				A309BBBE1381501E00E8E748 /* GLProgram.m */,
-				A309BBBF1381501E00E8E748 /* ShaderAux.h */,
-				A309BBC01381501E00E8E748 /* ShaderAux.m */,
+				A309BBBD1381501E00E8E748 /* Program.h */,
+				A309BBBE1381501E00E8E748 /* Program.m */,
+				A309BBBF1381501E00E8E748 /* ProgramHelper.h */,
+				A309BBC01381501E00E8E748 /* ProgramHelper.m */,
 			);
 			name = Internals;
 			sourceTree = "<group>";
@@ -144,11 +154,9 @@
 		A309BBC61381520300E8E748 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				A309BBC41381502600E8E748 /* GLView */,
-				A309BBC71381521B00E8E748 /* glHelper.h */,
-				A309BBC81381521B00E8E748 /* glHelper.c */,
-				A31C35F013828D2200ADFC89 /* Indent.h */,
-				A31C35F113828D2300ADFC89 /* Indent.m */,
+				A33A5A001385721B00275FA0 /* GL */,
+				A31C35F013828D2200ADFC89 /* PiLog.h */,
+				A31C35F113828D2300ADFC89 /* PiLog.m */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -156,10 +164,9 @@
 		A309BBF7138159A900E8E748 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				A309BBF3138159A500E8E748 /* Shader.vert */,
-				A309BBF4138159A500E8E748 /* Shader.frag */,
 			);
 			name = Shaders;
+			path = GLEngine;
 			sourceTree = "<group>";
 		};
 		A31C35EE1382808200ADFC89 /* BoilerPlate */ = {
@@ -185,6 +192,44 @@
 				A309BB9B13814C0600E8E748 /* CoreGraphics.framework */,
 			);
 			name = DefaultTemplate;
+			sourceTree = "<group>";
+		};
+		A33A5A001385721B00275FA0 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				A309BBC71381521B00E8E748 /* glHelper.h */,
+				A309BBC81381521B00E8E748 /* glHelper.c */,
+				A309BBC41381502600E8E748 /* GLView */,
+				A33A5A04138579EC00275FA0 /* GLTexture.h */,
+				A33A5A05138579EC00275FA0 /* GLTexture.m */,
+				A37BB1E713865C0900BB0821 /* Blurrer */,
+			);
+			name = GL;
+			sourceTree = "<group>";
+		};
+		A37BB1C613862A8800BB0821 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A309BB9F13814C0600E8E748 /* GLEngine-Info.plist */,
+				A309BBA013814C0600E8E748 /* InfoPlist.strings */,
+				A37BB1C813862B2B00BB0821 /* Shader.vert */,
+				A37BB1C713862B2B00BB0821 /* Shader.frag */,
+				A37BB1CB13862B3F00BB0821 /* gem_glow.jpg */,
+				A37BB1CC13862B3F00BB0821 /* gem.jpg */,
+				A309BBF7138159A900E8E748 /* Shaders */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A37BB1E713865C0900BB0821 /* Blurrer */ = {
+			isa = PBXGroup;
+			children = (
+				A37BB1DA1386479300BB0821 /* Blurrer.h */,
+				A37BB1DB1386479400BB0821 /* Blurrer.m */,
+				A37BB1E913865C5600BB0821 /* Blurrer.vert */,
+				A37BB1E813865C5600BB0821 /* Blurrer.frag */,
+			);
+			name = Blurrer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,11 +282,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A319EAA813817191001EBE6B /* Shader.vert in Resources */,
-				A319EAA913817191001EBE6B /* Shader.frag in Resources */,
 				A309BBA213814C0600E8E748 /* InfoPlist.strings in Resources */,
 				A309BBAB13814C0600E8E748 /* MainWindow.xib in Resources */,
 				A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */,
+				A37BB1CD13862B3F00BB0821 /* gem_glow.jpg in Resources */,
+				A37BB1CE13862B3F00BB0821 /* gem.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,10 +302,12 @@
 				A309BBAE13814C0600E8E748 /* GLEngineViewController.m in Sources */,
 				A309BBB913814C7700E8E748 /* CustomGLView.m in Sources */,
 				A309BBC11381501E00E8E748 /* GLView.m in Sources */,
-				A309BBC21381501E00E8E748 /* GLProgram.m in Sources */,
-				A309BBC31381501E00E8E748 /* ShaderAux.m in Sources */,
+				A309BBC21381501E00E8E748 /* Program.m in Sources */,
+				A309BBC31381501E00E8E748 /* ProgramHelper.m in Sources */,
 				A309BBC91381521B00E8E748 /* glHelper.c in Sources */,
-				A31C35F213828D2500ADFC89 /* Indent.m in Sources */,
+				A31C35F213828D2500ADFC89 /* PiLog.m in Sources */,
+				A33A5A06138579EC00275FA0 /* GLTexture.m in Sources */,
+				A37BB1DC1386479400BB0821 /* Blurrer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

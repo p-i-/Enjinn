@@ -10,16 +10,18 @@
 
 #import "CustomGLView.h"
 
+#import "GLTexture.h"
+
+#import "Blurrer.h"
+
 @interface CustomGLView ()
-- (void) genTexture;
+- (void) texDrawFunc: (id) id_X;
 - (void) renderTestQuadWithTexture: (GLuint) texID;
 @end
 
 // = = = = = = = = = = = = = = =  
 
 @implementation CustomGLView
-
-
 
         
 #define bytesForStructMember(STRUCT, MEMBER) sizeof( ((STRUCT *)NULL)->MEMBER )
@@ -29,19 +31,79 @@
 {
     self = [super initWithCoder: aDecoder];
     
-    [Indent log: @"Custom view's initWithCoder:" ];
-    [Indent inc];
+    LOG( @"Custom view's initWithCoder:" );
+    [PiLog indent];
     
     if (self) {
-        NSLog( @" " );
+        LOG( @"" );
         //[Indent log: @"invoking GLView's setupContextAndFBOs"];
         [self setupContextAndFBOs];
-                
-        NSLog( @" " );
-        [self genTexture];
         
-        NSLog( @" " );
-        [Indent log: @"Filling in structs for attributes & uniforms"];
+        LOG( @"" );
+        LOG( @"Generating texture" );
+        
+        //[self genTexture];
+        switch (3) {
+            case 0:
+            {
+                [GLTexture createTestXORGLTextureWidth: (GLuint) 1024
+                                                height: (GLuint) 1024
+                                        returningTexId: & texId_test ] ;
+                break;
+            }
+                
+            case 1:
+            {
+                [GLTexture  genTexOfWidth: (GLuint)    1024
+                                   height: (GLuint)    1024
+                             drawFuncTarg: (id)        self
+                              drawFuncSel:             @selector(texDrawFunc:)
+                                   inSlot:              GL_TEXTURE0
+                           returningTexId:             & texId_test ] ;
+                break;
+            }
+                
+            case 2:
+            {
+                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
+                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
+                
+                [GLTexture  createGLTextureFromImage:              gem
+                                            POTWidth: (GLuint)     1024
+                                           POTHeight: (GLuint)     1024
+                                              inSlot:              GL_TEXTURE0
+                                      returningTexId:              & texId_test ];
+                break;
+            }
+                
+            case 3:
+            {
+                GLuint texId_gem;
+                
+                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
+                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
+                
+                [GLTexture  createGLTextureFromImage:              gem
+                                            POTWidth: (GLuint)     1024
+                                           POTHeight: (GLuint)     1024
+                                              inSlot:              GL_TEXTURE1 // shader will want slot 0 later
+                                      returningTexId:              & texId_gem ];
+
+                // blur gem texture onto test-texture
+                [Blurrer  blurTexture:              texId_gem
+                             POTWidth: (GLuint)     1024
+                            POTHeight: (GLuint)     1024
+                       returningTexId:              & texId_test ];
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
+        
+        LOG( @"" );
+        LOG( @"Filling in structs for attributes & uniforms" );
         atts = ( ATTRIBUTE [] )
         {
             { A0_VERTEX_XY,     "A0_glVertex",             glFloatsFor( VERTEX_XY_ST_RGBA, xy ),    offsetof( VERTEX_XY_ST_RGBA, xy ) },
@@ -56,73 +118,53 @@
         };
 
         // this is a GLView method
-        NSLog( @" " );
-        //[Indent log: @"invoking GLView's setupProgramWithShader:attributes:uniforms: passing in custom data"];
+        LOG( @"" );
         [self setupProgramWithShader: @"Shader"
                           attributes: atts
                             uniforms: unifs ];
         
-        NSLog( @" " );
-        //[Indent log: @"invoking GLView's setupVertexArray: passing in custom data"];
+        LOG( @"" );
         [self setupVertexArrayPointers: atts];
         
-        NSLog( @" " );
-        //[Indent log: @"invoking GLView's startDrawing"];
+        LOG( @"" );
         [self startDrawing];
     }
     
-    [Indent dec];
+    [PiLog outdent];
     
     return self;
 }
 
-
-
-- (void) genTexture
+- (void) texDrawFunc: (id) id_X
 {
-    // Create A 512x512 greyscale texture
+    CGContextRef X = (CGContextRef) id_X;
+    CGSize bitmapSize = CGSizeMake( CGBitmapContextGetWidth( X ), CGBitmapContextGetHeight( X ) );
+    
     {
-		// MUST be power of 2 for W & H or FAILS!
-		GLuint W = 512, H = 512;
+        CGPoint center = CGPointMake( bitmapSize.width / 2., 
+                                     bitmapSize.height / 2. );
 		
-		[Indent log: [ NSString stringWithFormat: @"Generating texture @ %d x %d \n", W, H ] ];
-		
-        // Create a pretty greyscale pixel pattern
-		GLubyte *P = calloc( 1, ( W * H * 4 * sizeof( GLubyte ) ) );
         
-        for ( GLuint i = 0; ( i < H ); ++i )
-        {
-            for ( GLuint j = 0; ( j < W ); ++j )
-            {
-                P[( ( i * W + j ) * 4  +  0 )] =
-                P[( ( i * W + j ) * 4  +  1 )] =
-                P[( ( i * W + j ) * 4  +  2 )] =
-                P[( ( i * W + j ) * 4  +  3 )] = ( i ^ j );
-            }
-        }       
+        CGRect bounds = CGRectMake( 0, 0, bitmapSize.width, bitmapSize.height );
         
-		// Ask GL to give us a texture-ID for us to use
-		glGenTextures( 1, & texId_XORPattern );
-		
-        // make it the ACTIVE texture, ie functions like glTexImage2D will 
-		// automatically know to use THIS texture
-		glBindTexture( GL_TEXTURE_2D, texId_XORPattern );
-		
-        // set some params on the ACTIVE texture
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+        // fill background rect dark red
+        CGContextSetAlpha(X, 0.1);
+        CGContextFillRect(X, bounds);
         
-		// WRITE/COPY from P into active texture  
-        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, W, H, 0, GL_RGBA, GL_UNSIGNED_BYTE, P );
-		
-        free( P );
+        // circle
+        CGContextSetAlpha(X, 0.5);
+        CGContextFillEllipseInRect(X, bounds);
         
-        glLogAndFlushErrors();
+        // fat rounded-cap line from origin to center of view
+        CGContextSetAlpha(X, 0.8);
+        CGContextSetLineWidth(X, 30);	
+        CGContextSetLineCap(X, kCGLineCapRound);
+        CGContextBeginPath(X);
+        CGContextMoveToPoint(X, 0,0);
+        CGContextAddLineToPoint(X, center.x, center.y);
+        CGContextStrokePath(X);
     }
-
 }
-
-
 
 - (void)dealloc
 {
@@ -167,7 +209,7 @@
     
     glLogAndFlushErrors();
     
-    [self renderTestQuadWithTexture: texId_XORPattern];
+    [self renderTestQuadWithTexture: texId_test];
 }
 
 
@@ -188,6 +230,7 @@
     GLushort quadIndices[] = {0, 1, 3, 2}; 
     
     
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture( GL_TEXTURE_2D, texID );
     
     if (1)
