@@ -15,12 +15,12 @@
 
 @interface Program ()
 
-- (BOOL) loadShadersCompileAndLink: (NSString*) in_shader
-                 bindingAttributes: ( ATTRIBUTE [] ) in_attributeArray ;
+- (BOOL) loadShadersCompileAndLink: ( NSString* )       in_shader
+                 bindingAttributes: ( ATTRIBUTE [] )    in_attributeArray ;
 
-- (void) processUniformArray: ( char* [] ) in_uniformArray ;
+- (void) processUniformArray:       ( char* [] )        in_uniformArray ;
 
-- (void) bindAttributes: ( ATTRIBUTE [] ) in_attributeArray ;
+- (void) bindAttributes:            ( ATTRIBUTE [] )    in_attributeArray ;
 
 @end
 
@@ -56,20 +56,17 @@
     [PiLog indent];
     
     NSAssert( glCheckFramebufferStatus( GL_FRAMEBUFFER ) == GL_FRAMEBUFFER_COMPLETE, @"Failed to make complete framebuffer object: Make sure you got the order right." );
-    
-    glLogAndFlushErrors();
-    
-    // calls glCreateProgram();
-    // programId = [Program program];
-    
+        
     // load shaders, bind attributes, compile shaders, link shaders, validate program, delete shaders
     [self loadShadersCompileAndLink: in_shaderFilename
-                     bindingAttributes: in_attributeArray ];
+                  bindingAttributes: in_attributeArray ];
     
     // creates & fills an internal 'GLUint uniformIds[]' array
     [self processUniformArray: in_uniformArray];
     
     [self use];
+
+    glLogAndFlushErrors();
     
     [PiLog outdent];
 }
@@ -85,14 +82,11 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-- (BOOL) loadShadersCompileAndLink: (NSString*) in_shader
-                 bindingAttributes: ( ATTRIBUTE [] ) in_attributeArray 
+- (BOOL) loadShadersCompileAndLink: (NSString*)         in_shader
+                 bindingAttributes: ( ATTRIBUTE [] )    in_attributeArray 
 {
     LOG( @"loadShadersCompileAndLink:bindingAttributes:" );
     [PiLog indent];
-    
-    glLogAndFlushErrors();
-    
     
     // load, compile & attach shaders
     GLuint vertShader, fragShader;
@@ -103,6 +97,8 @@
         
         NSAssert( (vert_path != 0x0) && (frag_path != 0x0), @"Couldn't locate shader! Make sure it's added to the target: target -> build phases -> copy bundle resources \n" );
         
+        // - - - 
+        
         LOG( @"Compiling shaders" );
         bool vs_ok = [ProgramHelper  compileShaderOfType: GL_VERTEX_SHADER
                                                 filename: vert_path
@@ -111,19 +107,17 @@
         bool fs_ok = [ProgramHelper  compileShaderOfType: GL_FRAGMENT_SHADER
                                                 filename: frag_path
                                        returningShaderId: & fragShader ];
-        
-        glLogAndFlushErrors();
-        
+                
         NSAssert( vs_ok && fs_ok, @"Failed to compile shader! \n" );
         
+        // - - - 
         
         LOG( @"Attaching shaders to program" );
         glAttachShader( id_program, vertShader );
         glAttachShader( id_program, fragShader );
-        
-        glLogAndFlushErrors();
-	}
+    }
     
+    // each vertex has several attributes; tokens in the vertex-shader that lets us pass in all the data for that vertex in (eg colourRGBA, posXY, textureST)
     [self bindAttributes: in_attributeArray];
     
     // LINK program
@@ -131,19 +125,18 @@
         LOG( @"Linking program" );
         bool ok = [ProgramHelper linkProgram: id_program];
         NSAssert( ok, @"Failed to link program! \n" );
-        glLogAndFlushErrors();
     }
     
+#if defined( DEBUG )
     // Validate
     {
         // Validate program before drawing. This is a good check, but only really necessary in a debug build.
         // DEBUG macro must be defined in your debug configurations if that's not already the case.
-#if defined( DEBUG )
         LOG( @"Validating program" );
         bool ok = [ProgramHelper validateProgram: id_program];
         NSAssert( ok, @"Failed to validate program: %d", id_program);
-#endif	
     }
+#endif	
     
     // Delete shaders
     {
@@ -152,7 +145,10 @@
         glDeleteShader( fragShader );
     }
     
+    glLogAndFlushErrors();
+    
     [PiLog outdent];
+    
     return YES;
 }
 
@@ -179,9 +175,9 @@
             LOG( @"Uniform '%s' is at location: %d",  in_uniformArray[ i ],  uniformIds[ i ] );
             NSAssert( uniformIds[ i ] >= 0, @"Problem with uniform '%s'", in_uniformArray[ i ] );
         }
-        
-        glLogAndFlushErrors();
     }
+    
+    glLogAndFlushErrors();
     
     [PiLog outdent];
 }
@@ -215,13 +211,13 @@
             floatsTotal += pA->glFloats;
             i++;
         } ;
-        
-        glLogAndFlushErrors();
-        
+            
         attribBytesTotal = floatsTotal * sizeof( GLfloat );
         attribCount = i;
     }
     
+    glLogAndFlushErrors();
+
     [PiLog outdent];
 }
 

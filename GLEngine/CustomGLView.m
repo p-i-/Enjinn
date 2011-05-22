@@ -38,125 +38,119 @@
 {
     self = [super initWithCoder: aDecoder];
     
+    if (! self)
+        return nil;
+    
     LOG( @"Custom view's initWithCoder:" );
     [PiLog indent];
     
-    if (self) {
-        LOG( @"" );
-        [self setupContextAndFBOs];
+    {
+        int maxTextureImageUnits;
+        glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS, & maxTextureImageUnits );
         
-        LOG( @"" );
-        LOG( @"Generating texture" );
-        
-        switch ( demo ) {
-            case demo_RenderTexturedQuad_XORBitPattern:
-            {
-                [GLTexture createTestXORGLTextureWidth: (GLuint) 1024
-                                                height: (GLuint) 1024
-                                        returningTexId: & texId_test ] ;
-                break;
-            }
-                
-            case demo_RenderTexturedQuad_DrawFunc:
-            {
-                [GLTexture  genTexOfWidth: (GLuint)    1024
-                                   height: (GLuint)    1024
-                             drawFuncTarg: (id)        self
-                              drawFuncSel:             @selector(texDrawFunc:)
-                                   inSlot:              GL_TEXTURE0
-                           returningTexId:             & texId_test ] ;
-                break;
-            }
-                
-            case demo_RenderTexturedQuad_TexFromImage:
-            {
-                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
-                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
-                
-                [GLTexture  createGLTextureFromImage:              gem
-                                            POTWidth: (GLuint)     1024
-                                           POTHeight: (GLuint)     1024
-                                              inSlot:              GL_TEXTURE0
-                                      returningTexId:              & texId_test ];
-                break;
-            }
-                
-            case demo_RenderToTexture:
-            {
-                GLuint srcSlot = GL_TEXTURE1;
-//                GLuint destSlot = GL_TEXTURE0;
-                
-                GLuint texId_gem;
-                
-                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
-                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
-                
-                [GLTexture  createGLTextureFromImage:              gem
-                                            POTWidth: (GLuint)     1024
-                                           POTHeight: (GLuint)     1024
-                                              inSlot:              srcSlot // shader will want slot 0 later
-                                      returningTexId:              & texId_gem ];
-                
-                glLogAndFlushErrors();
-                
-                [Blurrer  createTextureByBlurringTexture: texId_gem
-                                                 POTSize: (GLSize) {1024, 1024}
-                                          returningTexId: & texId_test ];
-                 
-                // blur gem texture onto test-texture
-//                [Blurrer  blurTexture:              texId_gem
-//                             POTWidth: (GLuint)     1024
-//                            POTHeight: (GLuint)     1024
-//                              srcSlot: (GLuint)     srcSlot
-//                             destSlot: (GLuint)     destSlot
-//                       returningTexId:              & texId_test ];
-                break;
-            }
-                
-            default:
-                break;
-        }
-        
-        glLogAndFlushErrors();
-
-        
-        LOG( @"" );
-        LOG( @"Filling in structs for attributes & uniforms" );
-        atts = ( ATTRIBUTE [] )
-        {
-            { A0_VERTEX_XY,     "A0_glVertex",             glFloatsFor( VERTEX_XY_ST_RGBA, xy ),    offsetof( VERTEX_XY_ST_RGBA, xy ) },
-            { A1_TEXCOORD_ST,   "A1_glMultiTexCoord_st",   glFloatsFor( VERTEX_XY_ST_RGBA, st ),    offsetof( VERTEX_XY_ST_RGBA, st ) },
-            { A2_COLOR_RGBA,    "A2_glColor",              glFloatsFor( VERTEX_XY_ST_RGBA, rgba ),  offsetof( VERTEX_XY_ST_RGBA, rgba ) },
-            { ATTRIBUTE_COUNT,  END_OF_ATTRIBUTES, 0, 0 }
-        };
-        
-        unifs = ( char* [] )
-        {
-            "U0_glMVPMatrix", 
-        };
-
-        // this is a GLView method
-        LOG( @"" );
-        
-        
-        self.program = [Program program];
-            
-            [program setupProgramWithShader: @"Shader"
-                                 attributes: atts
-                                   uniforms: unifs ];
-
-        
-        LOG( @"" );
-        GLuint id_VertBuf;
-        [Vertex setupVertexArrayPointers: atts
-                      returningVertBufId: & id_VertBuf ];
-        
-        // [program genVertBufWithId
-        
-        LOG( @"" );
-        [self startDrawing];
+        LOG( @"MaxTextureImageUnits: %d", maxTextureImageUnits );
     }
     
+    LOG( @"" );
+    [self setupContextAndFBOs];
+    
+    LOG( @"" );
+    LOG( @"Generating texture" );
+    
+    switch ( demo ) {
+        case demo_RenderTexturedQuad_XORBitPattern:
+        {
+            [GLTexture createTestXORGLTextureWidth: (GLuint) 1024
+                                            height: (GLuint) 1024
+                                    returningTexId: & texId_test ] ;
+            break;
+        }
+            
+        case demo_RenderTexturedQuad_DrawFunc:
+        {
+            [GLTexture  genTexOfWidth: (GLuint)    1024
+                               height: (GLuint)    1024
+                         drawFuncTarg: (id)        self
+                          drawFuncSel:             @selector(texDrawFunc:)
+                       returningTexId:             & texId_test ] ;
+            break;
+        }
+            
+        case demo_RenderTexturedQuad_TexFromImage:
+        {
+            NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
+            UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
+            
+            [GLTexture  createGLTextureFromImage:              gem
+                                        POTWidth: (GLuint)     1024
+                                       POTHeight: (GLuint)     1024
+                                  returningTexId:              & texId_test ];
+            break;
+        }
+            
+        case demo_RenderToTexture:
+        {
+            GLuint texId_gem;
+            
+            NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
+            UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
+            
+            [GLTexture  createGLTextureFromImage:              gem
+                                        POTWidth: (GLuint)     1024
+                                       POTHeight: (GLuint)     1024
+                                  returningTexId:              & texId_gem ];
+            
+            glLogAndFlushErrors();
+            
+            [Blurrer  createTextureByBlurringTexture: texId_gem
+                                             POTSize: (GLSize) {1024, 1024}
+                                      returningTexId: & texId_test ];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    glLogAndFlushErrors();
+    
+    
+    LOG( @"" );
+    LOG( @"Filling in structs for attributes & uniforms" );
+    atts = ( ATTRIBUTE [] )
+    {
+        { A0_VERTEX_XY,     "A0_glVertex",             glFloatsFor( VERTEX_XY_ST_RGBA, xy ),    offsetof( VERTEX_XY_ST_RGBA, xy ) },
+        { A1_TEXCOORD_ST,   "A1_glMultiTexCoord_st",   glFloatsFor( VERTEX_XY_ST_RGBA, st ),    offsetof( VERTEX_XY_ST_RGBA, st ) },
+        { A2_COLOR_RGBA,    "A2_glColor",              glFloatsFor( VERTEX_XY_ST_RGBA, rgba ),  offsetof( VERTEX_XY_ST_RGBA, rgba ) },
+        { ATTRIBUTE_COUNT,  END_OF_ATTRIBUTES, 0, 0 }
+    };
+    
+    unifs = ( char* [] )
+    {
+        "U0_glMVPMatrix", 
+    };
+    
+    // this is a GLView method
+    LOG( @"" );
+    
+    
+    self.program = [Program program];
+    
+    [program setupProgramWithShader: @"Shader"
+                         attributes: atts
+                           uniforms: unifs ];
+    
+    
+    LOG( @"" );
+    GLuint id_VertBuf;
+    [Vertex setupVertexArrayPointers: atts
+                  returningVertBufId: & id_VertBuf ];
+    
+    // [program genVertBufWithId
+    
+    LOG( @"" );
+    [self startDrawing];
+
     [PiLog outdent];
     
     return self;
@@ -258,7 +252,7 @@
     GLushort quadIndices[] = {0, 1, 3, 2}; 
     
     
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture( GL_TEXTURE0 );
     glBindTexture( GL_TEXTURE_2D, texID );
     
     if (1)

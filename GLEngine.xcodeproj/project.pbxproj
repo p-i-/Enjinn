@@ -31,6 +31,7 @@
 		A37F3193138782100022D880 /* Blurrer.vert in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1E913865C5600BB0821 /* Blurrer.vert */; };
 		A37F3194138782100022D880 /* Blurrer.frag in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1E813865C5600BB0821 /* Blurrer.frag */; };
 		A37F319813879A9F0022D880 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = A37F319713879A9F0022D880 /* Vertex.m */; };
+		A3B33B23138944520094580A /* Common Mistakes - OpenGL.org.webloc in Resources */ = {isa = PBXBuildFile; fileRef = A3B33B22138944520094580A /* Common Mistakes - OpenGL.org.webloc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		A37BB1E913865C5600BB0821 /* Blurrer.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Blurrer.vert; sourceTree = "<group>"; };
 		A37F319613879A9F0022D880 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		A37F319713879A9F0022D880 /* Vertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
+		A3B33B22138944520094580A /* Common Mistakes - OpenGL.org.webloc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Common Mistakes - OpenGL.org.webloc"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				A37BB1D71386407F00BB0821 /* README */,
+				A3B33B22138944520094580A /* Common Mistakes - OpenGL.org.webloc */,
 				A309BB9D13814C0600E8E748 /* GLEngine */,
 				A37BB1C613862A8800BB0821 /* Resources */,
 				A309BB9613814C0600E8E748 /* Frameworks */,
@@ -296,6 +299,7 @@
 				A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */,
 				A37BB1CD13862B3F00BB0821 /* gem_glow.jpg in Resources */,
 				A37BB1CE13862B3F00BB0821 /* gem.jpg in Resources */,
+				A3B33B23138944520094580A /* Common Mistakes - OpenGL.org.webloc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

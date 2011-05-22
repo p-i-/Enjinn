@@ -46,7 +46,6 @@
     [GLTexture createGLTextureWidth: W
                              height: H
                          FromAlphas: alphas
-                  intoGLTextureSlot: GL_TEXTURE0
                      returningTexId: pTexID ] ;
     
     free( alphas );
@@ -58,7 +57,6 @@
                 height: (GLuint)    in_H
           drawFuncTarg: (id)        targ
            drawFuncSel: (SEL)       sel
-                inSlot: (GLenum)    in_slotNum
         returningTexId: (GLuint*)   pTexID
 {    
     GLubyte * imageData;
@@ -108,7 +106,6 @@
     [GLTexture createGLTextureWidth: in_W
                              height: in_H
                          FromAlphas: imageData
-                  intoGLTextureSlot: in_slotNum
                      returningTexId: pTexID ];
     
     // release context & free bitmap-store
@@ -123,7 +120,6 @@
 + (void) createGLTextureFromImage: (UIImage *) srcImage
                          POTWidth: (GLuint) dest_W
                         POTHeight: (GLuint) dest_H
-                           inSlot: (GLenum) slotNum
                    returningTexId: (GLuint*) pTexID
 {
     bool ok = isPOT(dest_W) && isPOT(dest_H);
@@ -147,7 +143,6 @@
     [GLTexture createGLTextureWidth: dest_W
                              height: dest_H
                          FromAlphas: alphas
-                  intoGLTextureSlot: slotNum
                      returningTexId: pTexID ];
     
     free( alphas );
@@ -286,12 +281,10 @@ CGRect makeTargetRect( CGSize srcSize, CGSize destSize, BOOL stretchToFit, BOOL 
 + (void) createGLTextureWidth: (GLuint) W
                        height: (GLuint) H
                    FromAlphas: (uint8_t *) alphas
-            intoGLTextureSlot: (GLenum) slotID
                returningTexId: (GLuint*) pTexID
 {
     NSAssert ( isPOT( W ) && isPOT( H ), @"ERROR: GL Textures on iOS MUST be power of two!" );
     
-    glActiveTexture( slotID );
     
     // Ask GL to give us a texture-ID for us to use
     glGenTextures( 1, pTexID );

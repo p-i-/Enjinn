@@ -20,7 +20,6 @@
 + (void) createGLTextureWidth: (GLuint) W
                        height: (GLuint) H
                    FromAlphas: (uint8_t *) alphas
-            intoGLTextureSlot: (GLenum) slotID
                returningTexId: (GLuint*) pTexID ;
 
 ///  example usage: 
@@ -41,14 +40,12 @@
                 height: (GLuint)    in_H
           drawFuncTarg: (id)        targ
            drawFuncSel: (SEL)       sel
-                inSlot: (GLenum)    slotNum
         returningTexId: (GLuint*)   pTexID ;
 
 
 + (void) createGLTextureFromImage: (UIImage *)  srcImage
                          POTWidth: (GLuint)     dest_W
                         POTHeight: (GLuint)     dest_H
-                           inSlot: (GLenum)     slotNum
                    returningTexId: (GLuint*)    pTexID ;
 
 

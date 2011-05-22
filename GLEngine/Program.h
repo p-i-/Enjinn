@@ -8,7 +8,6 @@
 
 #import <OpenGLES/ES2/gl.h>
 
-//#import "GLViewBits.h"
 #import "Vertex.h"
 
 @interface Program : NSObject
@@ -20,7 +19,6 @@
 - (void) setupProgramWithShader: ( NSString * )     in_shaderFilename
                      attributes: ( ATTRIBUTE [] )   in_attributeArray
                        uniforms: ( char* [] )       in_uniformArray ;
-
 
 + (id) program ;
 

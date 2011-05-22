@@ -31,7 +31,6 @@
 @end
 
 
-
 @implementation Blurrer
 
 + (void)  createTextureByBlurringTexture: (GLuint)     in_id_tex
@@ -49,30 +48,32 @@
                                     POTSize: in_POTSize
                                     byTheta: - M_PI / 2.
                  thenBlurringReturningTexId: out_p_id_tex ];
+
+
 }
 
 
 #define bytesForStructMember(STRUCT, MEMBER) sizeof( ((STRUCT *)NULL)->MEMBER )
 #define glFloatsFor(STRUCT, MEMBER) bytesForStructMember( STRUCT, MEMBER ) / sizeof( GLfloat )
 
-+ (void)   createTextureByRotatingTexture: (GLuint)  in_id_tex
-                                  POTSize: (GLSize) in_POTSize
-                                  byTheta: (GLfloat) in_theta
+// Use GL_TEXTURE0 for SOURCE, GL_TEXTURE1 for DESTINATION
++ (void)   createTextureByRotatingTexture: (GLuint)     in_id_tex
+                                  POTSize: (GLSize)     in_POTSize
+                                  byTheta: (GLfloat)    in_theta
                thenBlurringReturningTexId: (GLuint *)   out_p_id_tex
 {
     GLuint W = in_POTSize.x;
     GLuint H = in_POTSize.y;
     
     // create the texture
-    GLuint id_texDest;
+    GLuint id_texRGBA;
     {
-        // fragshader will use 0 
-        glActiveTexture( GL_TEXTURE1 ); // use 0 for src, 1 for dest
+        // 1 for dest -- fragshader will use 0 for src
+        glActiveTexture( GL_TEXTURE1 ); 
         
         // Ask GL to give us a texture-ID for us to use
-        glGenTextures( 1, & id_texDest );
-        glBindTexture( GL_TEXTURE_2D, id_texDest );
-        
+        glGenTextures( 1, & id_texRGBA );
+        glBindTexture( GL_TEXTURE_2D, id_texRGBA );
         
         // actually allocate memory for this texture
         GLuint pixCount = W * H;
@@ -80,21 +81,6 @@
         typedef struct { uint8_t r, g, b, a } rgba;
         
         rgba * alphas = calloc( pixCount, sizeof( rgba ) );
-        
-        // XOR texture
-        //        int pix=0;
-        //        for ( int x = 0;  x < in_W;  x++ )
-        //        {
-        //            for ( int y = 0;  y < in_H;  y++ )
-        //            {
-        //                //alphas[ pix ].r = (y < 256) ? x^y : 0;
-        //                //alphas[ pix ].g = (y < 512) ? 127 : 0;
-        //                //alphas[ pix ].b = (y < 768) ? 127 : 0;
-        //                alphas[ pix ].a = (y < 512) ? x^y : 0; // half mottled, half black
-        //                
-        //                pix++;
-        //            }
-        //        }
         
         // set some params on the ACTIVE texture
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
@@ -113,7 +99,6 @@
         free( alphas );
         
         glLogAndFlushErrors();
-        
     }
     
     
@@ -130,7 +115,7 @@
         glFramebufferTexture2D( GL_FRAMEBUFFER, 
                                GL_COLOR_ATTACHMENT0, 
                                GL_TEXTURE_2D, 
-                               id_texDest, 
+                               id_texRGBA, 
                                0 );
                 
         // Test the framebuffer for completeness. This test only needs to be performed when the framebuffer’s configuration changes.
@@ -138,22 +123,16 @@
         GLenum status = glCheckFramebufferStatus( GL_FRAMEBUFFER ) ;
         NSAssert1( status == GL_FRAMEBUFFER_COMPLETE, @"failed to make complete framebuffer object %x", status );
         
-        * out_p_id_tex = id_texDest;
         
         
         typedef struct { GLfloat x,y; } GLVecXY;
         typedef struct { GLfloat s,t; } GLVecST;
-        typedef union { 
-            struct { GLfloat x, y, s, t; };
-            struct { GLVecXY xy; GLVecST st; 
-            };  } VERTEX_XY_ST
-        ;
+        typedef union {  struct{GLfloat x,y,s,t;};struct{GLVecXY xy;GLVecST st;};  }  VERTEX_XY_ST;
         
         enum 
         {
             A0_VERTEX_XY,
             A1_TEXCOORD_ST,
-            A2_COLOR_RGBA,
             ATTRIBUTE_COUNT
         };
         
@@ -164,6 +143,14 @@
             { ATTRIBUTE_COUNT,  END_OF_ATTRIBUTES, 0, 0 }
         };
         
+        enum 
+        {
+            U0_MATRIX,
+            U1_SRC_TEXTURE,
+            U2_BLURSIZE,
+            UNIFORM_COUNT
+        };
+        
         char** unifs = ( char* [] )
         {
             "U0_glMVPMatrix", 
@@ -171,12 +158,7 @@
             "U2_blurSize", 
             NULL
         };
-        enum 
-        {
-            U0_MATRIX,
-            U1_SRC_TEXTURE,
-            U2_BLURSIZE
-        };
+        
         
         
         Program* program = [Program program];
@@ -184,28 +166,23 @@
         [program setupProgramWithShader: @"Blurrer"
                              attributes: atts
                                uniforms: unifs ];
-        
-        glLogAndFlushErrors();
-        
+                
         GLuint id_VertBuf;
         [Vertex setupVertexArrayPointers: atts
                       returningVertBufId: & id_VertBuf ];
-        
-        glLogAndFlushErrors();
-        
+                
         // load uniforms
         {
             //matrix
             {
                 float t = in_theta;
                 
-                // Setup uniform (matrix, sampler) state.  
                 const GLfloat M[ ] = // Assumes ( MV * P ) matrix.
                 {
                     cos(t),     -sin(t),        .0,    .0,  
                     sin(t),      cos(t),        .0,    .0, 
                     .0,          .0,           1. ,    .0,  
-                    .0,          .0,            .0,    1.   };
+                    .0,          .0,            .0,   1.   };
                 
                 // NOTE: Need to call glUseProgram BEFORE doing this.
                 GLint matrixUnifId = [ program uniformId: (GLuint)U0_MATRIX  ];
@@ -213,11 +190,11 @@
             }
             
             
-            // src texture
+            // set src texture to 0 (for GL_TEXTURE0)
             {
                 GLint srcTexId = [ program uniformId: (GLuint)U1_SRC_TEXTURE ];
                 
-                glUniform1i( srcTexId, 0 ); // src 0, dest 1
+                glUniform1i( srcTexId, 0 );
             }
             
             // blur
@@ -226,14 +203,11 @@
                 glUniform1f( blurId, 25.f/1024.f );
             }
         }
-        glLogAndFlushErrors();
         
         // load points
         {
-            //float k = 0.99;
             VERTEX_XY_ST testQuad[4] = 
             {
-                //  X   Y    S  T
                 {.xy = {-1, -1}, .st = {0, 0} },
                 {.xy = { 1, -1}, .st = {1, 0} },
                 {.xy = { 1,  1}, .st = {1, 1} },
@@ -243,28 +217,36 @@
             glBufferData( GL_ARRAY_BUFFER, sizeof( testQuad ), testQuad, GL_STATIC_DRAW );         
         }
         
-        glLogAndFlushErrors();
+        // bind source texture to slot GL_TEXTURE0
+        glActiveTexture( GL_TEXTURE0 );
+        glBindTexture( GL_TEXTURE_2D, in_id_tex );
         
-        GLushort quadIndices[] = {0, 1, 3, 2}; 
+        // this will map gl(-1,-1) -> pixel(0,0) and gl(1,1) -> pix(W,H)
+        glViewport( 0, 0, W, H );
         
-        // bind source texture
-        {
-            glActiveTexture( GL_TEXTURE0 /*in_srcSlot*/ ); // src 0, dest 1
-            glBindTexture( GL_TEXTURE_2D, in_id_tex );
-        }
-        
-        glLogAndFlushErrors();
-        
-        glViewport(0, 0, 1024, 1024);
-        
+        // DRAW QUAD!
+        GLushort quadIndices[] = { 0, 1, 3, 2 }; 
         glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, quadIndices );
-        glLogAndFlushErrors();
         
+        // don't need vertex buffer any more
         glDeleteBuffers( 1, & id_VertBuf );
+
+        // http://www.opengl.org/wiki/Common_Mistakes#glFinish_and_glFlush says dont need these         
+        //        // flush any pending operations
+        //        glFlush();
+        //        
+        //        // ... and wait for all GL processes to complete
+        //        glFinish();
+        
+        // unbind FBO before deleting it
+        glBindFramebuffer( GL_FRAMEBUFFER, oldFBO );
         glDeleteFramebuffers( 1, & textureFrameBuffer );
     }
+        
     
-    glBindFramebuffer( GL_FRAMEBUFFER, oldFBO );
+    glLogAndFlushErrors();
+    
+    * out_p_id_tex = id_texRGBA;
 }
 
 @end
