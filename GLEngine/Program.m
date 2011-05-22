@@ -41,7 +41,7 @@
 {
     self = [super init];
     
-    programId = glCreateProgram();
+    id_program = glCreateProgram();
     
     return self;
 }
@@ -56,6 +56,8 @@
     [PiLog indent];
     
     NSAssert( glCheckFramebufferStatus( GL_FRAMEBUFFER ) == GL_FRAMEBUFFER_COMPLETE, @"Failed to make complete framebuffer object: Make sure you got the order right." );
+    
+    glLogAndFlushErrors();
     
     // calls glCreateProgram();
     // programId = [Program program];
@@ -78,7 +80,7 @@
 - (void) use
 {
     LOG( @"Make program active program" );
-    glUseProgram( programId );
+    glUseProgram( id_program );
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -89,24 +91,26 @@
     LOG( @"loadShadersCompileAndLink:bindingAttributes:" );
     [PiLog indent];
     
-    LOG( @"Loading %@.vert & %@.frag", in_shader, in_shader );
+    glLogAndFlushErrors();
+    
     
     // load, compile & attach shaders
     GLuint vertShader, fragShader;
     {
+        LOG( @"Loading %@.vert & %@.frag", in_shader, in_shader );
         NSString* vert_path = [[NSBundle mainBundle] pathForResource: in_shader  ofType: @"vert"];
         NSString* frag_path = [[NSBundle mainBundle] pathForResource: in_shader  ofType: @"frag"];
         
         NSAssert( (vert_path != 0x0) && (frag_path != 0x0), @"Couldn't locate shader! Make sure it's added to the target: target -> build phases -> copy bundle resources \n" );
-
+        
         LOG( @"Compiling shaders" );
         bool vs_ok = [ProgramHelper  compileShaderOfType: GL_VERTEX_SHADER
-                                            filename: vert_path
-                                   returningShaderId: & vertShader ];
+                                                filename: vert_path
+                                       returningShaderId: & vertShader ];
         
         bool fs_ok = [ProgramHelper  compileShaderOfType: GL_FRAGMENT_SHADER
-                                            filename: frag_path
-                                   returningShaderId: & fragShader ];
+                                                filename: frag_path
+                                       returningShaderId: & fragShader ];
         
         glLogAndFlushErrors();
         
@@ -114,8 +118,8 @@
         
         
         LOG( @"Attaching shaders to program" );
-        glAttachShader( programId, vertShader );
-        glAttachShader( programId, fragShader );
+        glAttachShader( id_program, vertShader );
+        glAttachShader( id_program, fragShader );
         
         glLogAndFlushErrors();
 	}
@@ -125,7 +129,7 @@
     // LINK program
     {
         LOG( @"Linking program" );
-        bool ok = [ProgramHelper linkProgram: programId];
+        bool ok = [ProgramHelper linkProgram: id_program];
         NSAssert( ok, @"Failed to link program! \n" );
         glLogAndFlushErrors();
     }
@@ -136,8 +140,8 @@
         // DEBUG macro must be defined in your debug configurations if that's not already the case.
 #if defined( DEBUG )
         LOG( @"Validating program" );
-        bool ok = [ProgramHelper validateProgram: programId];
-        NSAssert( ok, @"Failed to validate program: %d", programId);
+        bool ok = [ProgramHelper validateProgram: id_program];
+        NSAssert( ok, @"Failed to validate program: %d", id_program);
 #endif	
     }
     
@@ -170,7 +174,7 @@
     {
         for (int i=0;  in_uniformArray[ i ];  i++)
         {            
-            uniformIds[ i ] = glGetUniformLocation( programId, in_uniformArray[ i ] ); 
+            uniformIds[ i ] = glGetUniformLocation( id_program, in_uniformArray[ i ] ); 
             
             LOG( @"Uniform '%s' is at location: %d",  in_uniformArray[ i ],  uniformIds[ i ] );
             NSAssert( uniformIds[ i ] >= 0, @"Problem with uniform '%s'", in_uniformArray[ i ] );
@@ -206,7 +210,7 @@
             
             LOG( @"Attribute #%d: '%s'", i, pA->token );
             
-            glBindAttribLocation( programId, i, pA->token );
+            glBindAttribLocation( id_program, i, pA->token );
             
             floatsTotal += pA->glFloats;
             i++;
@@ -228,5 +232,13 @@
     return uniformIds[ index ];
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+- (void) dealloc
+{
+    glDeleteProgram( id_program );
+    
+    [super dealloc];
+}
 
 @end

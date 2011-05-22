@@ -8,11 +8,12 @@
 
 #import <OpenGLES/ES2/gl.h>
 
-#import "GLViewBits.h"
+//#import "GLViewBits.h"
+#import "Vertex.h"
 
 @interface Program : NSObject
 { 
-    GLuint programId;
+    GLuint id_program;
     GLint* uniformIds;
 }
 

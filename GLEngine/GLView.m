@@ -19,7 +19,7 @@
 - (BOOL) resizeFromLayer:   (CAEAGLLayer *)     layer;
 
 @property (nonatomic, retain) CADisplayLink*    displayLink;
-@property (nonatomic, retain) Program*        program;
+//@property (nonatomic, retain) Program*          program;
 
 @end
 
@@ -28,7 +28,7 @@
 
 @implementation GLView
 
-@synthesize displayLink, program;
+@synthesize displayLink;//, program;
 
 + (id) glView
 {
@@ -122,94 +122,24 @@
 }
 
 
-- (void) setupProgramWithShader: ( NSString * )     in_shaderFilename
-                     attributes: ( ATTRIBUTE [] )   in_attributeArray
-                       uniforms: ( char* [] )       in_uniformArray
-{
-    LOG( @"GLView: setupProgramWithShader:attributes:uniforms:" );
-    [PiLog indent];
-
-    self.program = [Program program];
-    
-    [program setupProgramWithShader: in_shaderFilename
-                         attributes: in_attributeArray
-                           uniforms: in_uniformArray ];
-    //[program use];
-    
-    [PiLog outdent];
-}
-//    NSAssert( glCheckFramebufferStatus( GL_FRAMEBUFFER ) == GL_FRAMEBUFFER_COMPLETE, @"Failed to make complete framebuffer object: Make sure you got the order right." );
+//- (void) setupProgramWithShader: ( NSString * )     in_shaderFilename
+//                     attributes: ( ATTRIBUTE [] )   in_attributeArray
+//                       uniforms: ( char* [] )       in_uniformArray
+//{
+//    glLogAndFlushErrors();
 //    
-//    // calls glCreateProgram();
+//    LOG( @"GLView: setupProgramWithShader:attributes:uniforms:" );
+//    [PiLog indent];
+//
 //    self.program = [Program program];
-//        
-//    // load shaders, bind attributes, compile shaders, link shaders, validate program, delete shaders
-//    [program loadShadersCompileAndLink: in_shaderFilename
-//                     bindingAttributes: in_attributeArray ];
 //    
-//    // creates & fills an internal 'GLUint uniformIds[]' array
-//    [program processUniformArray: in_uniformArray];
-//    
-//    [program use];
+//    [program setupProgramWithShader: in_shaderFilename
+//                         attributes: in_attributeArray
+//                           uniforms: in_uniformArray ];
+//    //[program use];
 //    
 //    [PiLog outdent];
 //}
-//
-
-- (void) setupVertexArrayPointers: ( ATTRIBUTE [] ) in_attributeArray
-{
-    // NOTE: *Must* do: glBindBuffer( GL_ARRAY_BUFFER, tqVert_BufID ); 
-    //       before glEnableVertexAttribArray(...) and glVertexAttribPointer(...)  
-    //       ie WHICH vertex-buffer are we working on / structuring?
-    
-    LOG( @"GLView: setupVertexArrayPointers:" );
-    
-    GLuint tqVert_BufID;
-    glGenBuffers( 1, & tqVert_BufID ); 
-    glBindBuffer( GL_ARRAY_BUFFER, tqVert_BufID ); 
-    
-    int attribBytesTotal, attribCount;
-    {
-        int i=0, floatsTotal = 0;
-        while( YES )
-        {
-            ATTRIBUTE* pA = & in_attributeArray[ i ];
-            
-            if ( pA->token == END_OF_ATTRIBUTES )
-                break;
-            
-            floatsTotal += pA->glFloats;
-            i++;
-        } ;
-        
-        glLogAndFlushErrors();
-        
-        attribBytesTotal = floatsTotal * sizeof( GLfloat );
-        attribCount = i;
-    }
-    
-    {
-        for (int j=0;  j < attribCount;  j++)
-        {
-            ATTRIBUTE* pA = & in_attributeArray[ j ];
-            
-            glEnableVertexAttribArray( pA->id_ );
-            glVertexAttribPointer(
-                                  pA->id_,                          // 0,1,2,...
-                                  pA->glFloats,                     // # components for this attrib (MUST be 1,2,3,4)
-                                  GL_FLOAT,                         // type of each components
-                                  GL_FALSE,                         // normalized?
-                                  attribBytesTotal,                 // stride (bytes)
-                                  (const GLvoid *)  pA->byteOffset  // byte-offset within struct
-                                  );
-        }
-        
-        glLogAndFlushErrors();
-    }    
-    
-}
-
-
 
 - (void) startDrawing
 {
@@ -223,7 +153,6 @@
                            forMode: NSDefaultRunLoopMode ];
     
 }
-
 
 
 - (void) drawView: (CADisplayLink*) dispLink
@@ -270,10 +199,10 @@
     return YES;
 }
 
-- (GLint) uniformId: (GLuint) index
-{
-    return [program uniformId: index];
-}
+//- (GLint) uniformId: (GLuint) index
+//{
+//    return [program uniformId: index];
+//}
 
 
 // - - - - - - - - - - - - - - - - - 

@@ -7,6 +7,7 @@
 //
 
 #import "GLViewBits.h" // renderProtocol, ATTRIBUTE
+#import "Vertex.h"
 
 @class Program;
 @class EAGLContext;
@@ -26,15 +27,15 @@
 
 - (void) setupContextAndFBOs;
 
-- (void) setupProgramWithShader: ( NSString * )     in_shaderFilename
-                     attributes: ( ATTRIBUTE [] )   in_attributeArray
-                       uniforms: ( char* [] )       in_uniformArray ;
+//- (void) setupProgramWithShader: ( NSString * )     in_shaderFilename
+//                     attributes: ( ATTRIBUTE [] )   in_attributeArray
+//                       uniforms: ( char* [] )       in_uniformArray ;
 
-- (void) setupVertexArrayPointers: ( ATTRIBUTE [] ) in_attributeArray ;
+//- (void) setupVertexArrayPointers: ( ATTRIBUTE [] ) in_attributeArray ;
 
 - (void) startDrawing;
 
-- (GLint) uniformId: (GLuint) index;
+//- (GLint) uniformId: (GLuint) index;
 
 
 @end

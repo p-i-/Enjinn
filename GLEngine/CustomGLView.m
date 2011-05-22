@@ -14,18 +14,25 @@
 
 #import "Blurrer.h"
 
-@interface CustomGLView ()
+#import "Program.h"
+
+@interface CustomGLView ( )
 - (void) texDrawFunc: (id) id_X;
 - (void) renderTestQuadWithTexture: (GLuint) texID;
+
+@property (nonatomic, retain) Program*          program;
+
 @end
 
 // = = = = = = = = = = = = = = =  
 
 @implementation CustomGLView
 
+@synthesize program;
         
 #define bytesForStructMember(STRUCT, MEMBER) sizeof( ((STRUCT *)NULL)->MEMBER )
 #define glFloatsFor(STRUCT, MEMBER) bytesForStructMember( STRUCT, MEMBER ) / sizeof( GLfloat )
+
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -36,15 +43,13 @@
     
     if (self) {
         LOG( @"" );
-        //[Indent log: @"invoking GLView's setupContextAndFBOs"];
         [self setupContextAndFBOs];
         
         LOG( @"" );
         LOG( @"Generating texture" );
         
-        //[self genTexture];
-        switch (3) {
-            case 0:
+        switch ( demo ) {
+            case demo_RenderTexturedQuad_XORBitPattern:
             {
                 [GLTexture createTestXORGLTextureWidth: (GLuint) 1024
                                                 height: (GLuint) 1024
@@ -52,7 +57,7 @@
                 break;
             }
                 
-            case 1:
+            case demo_RenderTexturedQuad_DrawFunc:
             {
                 [GLTexture  genTexOfWidth: (GLuint)    1024
                                    height: (GLuint)    1024
@@ -63,7 +68,7 @@
                 break;
             }
                 
-            case 2:
+            case demo_RenderTexturedQuad_TexFromImage:
             {
                 NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
                 UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
@@ -76,24 +81,35 @@
                 break;
             }
                 
-            case 3:
+            case demo_RenderToTexture:
             {
+                GLuint srcSlot = GL_TEXTURE1;
+//                GLuint destSlot = GL_TEXTURE0;
+                
                 GLuint texId_gem;
                 
-//                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
-//                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
-//                
-//                [GLTexture  createGLTextureFromImage:              gem
-//                                            POTWidth: (GLuint)     1024
-//                                           POTHeight: (GLuint)     1024
-//                                              inSlot:              GL_TEXTURE1 // shader will want slot 0 later
-//                                      returningTexId:              & texId_gem ];
-
+                NSString* gemFile = [[NSBundle mainBundle] pathForResource:@"gem" ofType:@"jpg"];
+                UIImage* gem = [UIImage imageWithContentsOfFile: gemFile];
+                
+                [GLTexture  createGLTextureFromImage:              gem
+                                            POTWidth: (GLuint)     1024
+                                           POTHeight: (GLuint)     1024
+                                              inSlot:              srcSlot // shader will want slot 0 later
+                                      returningTexId:              & texId_gem ];
+                
+                glLogAndFlushErrors();
+                
+                [Blurrer  createTextureByBlurringTexture: texId_gem
+                                                 POTSize: (GLSize) {1024, 1024}
+                                          returningTexId: & texId_test ];
+                 
                 // blur gem texture onto test-texture
-                [Blurrer  blurTexture:              texId_gem
-                             POTWidth: (GLuint)     1024
-                            POTHeight: (GLuint)     1024
-                       returningTexId:              & texId_test ];
+//                [Blurrer  blurTexture:              texId_gem
+//                             POTWidth: (GLuint)     1024
+//                            POTHeight: (GLuint)     1024
+//                              srcSlot: (GLuint)     srcSlot
+//                             destSlot: (GLuint)     destSlot
+//                       returningTexId:              & texId_test ];
                 break;
             }
                 
@@ -101,6 +117,8 @@
                 break;
         }
         
+        glLogAndFlushErrors();
+
         
         LOG( @"" );
         LOG( @"Filling in structs for attributes & uniforms" );
@@ -119,12 +137,21 @@
 
         // this is a GLView method
         LOG( @"" );
-        [self setupProgramWithShader: @"Shader"
-                          attributes: atts
-                            uniforms: unifs ];
+        
+        
+        self.program = [Program program];
+            
+            [program setupProgramWithShader: @"Shader"
+                                 attributes: atts
+                                   uniforms: unifs ];
+
         
         LOG( @"" );
-        [self setupVertexArrayPointers: atts];
+        GLuint id_VertBuf;
+        [Vertex setupVertexArrayPointers: atts
+                      returningVertBufId: & id_VertBuf ];
+        
+        // [program genVertBufWithId
         
         LOG( @"" );
         [self startDrawing];
@@ -172,7 +199,7 @@
 }
 
 
-
+#define ROTATE YES
 - (void) willRender
 {
     glLogAndFlushErrors();
@@ -192,7 +219,8 @@
         
         
         static float t=0.f;
-        t+=.05;
+        if(ROTATE)
+            t+=.05;
         
         // Setup uniform (matrix, sampler) state.  
         const GLfloat M[ ] = // Assumes ( MV * P ) matrix.
@@ -203,7 +231,7 @@
             .0,         .0,            .0,   1.0  };
         
         // NOTE: Need to call glUseProgram BEFORE doing this.
-        GLint matrixUnifId = [ self uniformId: (GLuint)0 /* U0_MATRIX */ ];
+        GLint matrixUnifId = [ program uniformId: (GLuint)0 /* U0_MATRIX */ ];
         glUniformMatrix4fv( matrixUnifId, 1, GL_FALSE, M );                
 	}
     
@@ -219,7 +247,7 @@
     VERTEX_XY_ST_RGBA testQuad[4] = 
     {
         //  X   Y    S  T    R  G  B  A
-        {.xy = {-.5, -.5}, .st = {0, 0}, .rgba = {1, 0, 0, 1} },
+        {.xy = {-.5, -.5}, .st = {0, 0}, .rgba = {0, 0, 1, 1} },
         {.xy = { .5, -.5}, .st = {1, 0}, .rgba = {1, 0, 0, 1} },
         {.xy =  { .5,  .5}, .st = {1, 1}, .rgba = {1, 0, 0, 1} },
         {.xy =  {-.5,  .5}, .st = {0, 1}, .rgba = {1, 0, 0, 1} },

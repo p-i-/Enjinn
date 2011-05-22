@@ -1,8 +1,8 @@
 //
-//  GLViewBits.h
-//  F33rsmEnjinn
+//  Vertex.h
+//  GLEngine
 //
-//  Created by Pi on 15/05/2011.
+//  Created by Pi on 21/05/2011.
 //  Copyright 2011 Pi. All rights reserved.
 //
 
@@ -13,11 +13,10 @@
 #import <OpenGLES/ES2/gl.h>     // GLuint
 
 
-@protocol GLViewCallbacks <NSObject>
-- (void) willRender;
-@end
+//@protocol GLViewCallbacks <NSObject>
+//- (void) willRender;
+//@end
 
-/*
 #define END_OF_ATTRIBUTES NULL
 
 //  ... Also it will need to fill out all of the attributes used in the vertex shader, into this structure:
@@ -28,4 +27,12 @@ typedef struct {
     GLuint byteOffset;
 } ATTRIBUTE;
 
-*/
+
+@interface Vertex : NSObject {
+    
+}
+
++ (void) setupVertexArrayPointers: ( ATTRIBUTE [] ) in_attributeArray
+               returningVertBufId: (GLuint *)       pIdVertBuf ;
+
+@end

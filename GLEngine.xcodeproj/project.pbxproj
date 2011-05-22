@@ -28,6 +28,9 @@
 		A37BB1CD13862B3F00BB0821 /* gem_glow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1CB13862B3F00BB0821 /* gem_glow.jpg */; };
 		A37BB1CE13862B3F00BB0821 /* gem.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1CC13862B3F00BB0821 /* gem.jpg */; };
 		A37BB1DC1386479400BB0821 /* Blurrer.m in Sources */ = {isa = PBXBuildFile; fileRef = A37BB1DB1386479400BB0821 /* Blurrer.m */; };
+		A37F3193138782100022D880 /* Blurrer.vert in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1E913865C5600BB0821 /* Blurrer.vert */; };
+		A37F3194138782100022D880 /* Blurrer.frag in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1E813865C5600BB0821 /* Blurrer.frag */; };
+		A37F319813879A9F0022D880 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = A37F319713879A9F0022D880 /* Vertex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +74,8 @@
 		A37BB1DB1386479400BB0821 /* Blurrer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Blurrer.m; sourceTree = "<group>"; };
 		A37BB1E813865C5600BB0821 /* Blurrer.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Blurrer.frag; sourceTree = "<group>"; };
 		A37BB1E913865C5600BB0821 /* Blurrer.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Blurrer.vert; sourceTree = "<group>"; };
+		A37F319613879A9F0022D880 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		A37F319713879A9F0022D880 /* Vertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +208,8 @@
 				A33A5A04138579EC00275FA0 /* GLTexture.h */,
 				A33A5A05138579EC00275FA0 /* GLTexture.m */,
 				A37BB1E713865C0900BB0821 /* Blurrer */,
+				A37F319613879A9F0022D880 /* Vertex.h */,
+				A37F319713879A9F0022D880 /* Vertex.m */,
 			);
 			name = GL;
 			sourceTree = "<group>";
@@ -282,6 +289,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A37F3193138782100022D880 /* Blurrer.vert in Resources */,
+				A37F3194138782100022D880 /* Blurrer.frag in Resources */,
 				A309BBA213814C0600E8E748 /* InfoPlist.strings in Resources */,
 				A309BBAB13814C0600E8E748 /* MainWindow.xib in Resources */,
 				A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */,
@@ -308,6 +317,7 @@
 				A31C35F213828D2500ADFC89 /* PiLog.m in Sources */,
 				A33A5A06138579EC00275FA0 /* GLTexture.m in Sources */,
 				A37BB1DC1386479400BB0821 /* Blurrer.m in Sources */,
+				A37F319813879A9F0022D880 /* Vertex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

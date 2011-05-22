@@ -301,7 +301,10 @@ CGRect makeTargetRect( CGSize srcSize, CGSize destSize, BOOL stretchToFit, BOOL 
     // set some params on the ACTIVE texture
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    
+
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+
     // WRITE/COPY from P into active texture  
     glTexImage2D( GL_TEXTURE_2D, 0, GL_ALPHA, W, H, 
                  0, GL_ALPHA, GL_UNSIGNED_BYTE, (void *) alphas );

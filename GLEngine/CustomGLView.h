@@ -8,6 +8,16 @@
 
 #import "GLView.h"
 
+typedef enum
+{
+    demo_RenderTexturedQuad_XORBitPattern,
+    demo_RenderTexturedQuad_DrawFunc,
+    demo_RenderTexturedQuad_TexFromImage,
+    demo_RenderToTexture
+} DEMO;
+
+DEMO demo = demo_RenderToTexture;
+
 //  A T T R I B U T E S  &  U N I F O R M S
 
 typedef struct { GLfloat x,y; } GLVecXY;
