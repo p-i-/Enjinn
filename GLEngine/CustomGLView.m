@@ -17,10 +17,10 @@
 #import "Program.h"
 
 @interface CustomGLView ( )
-- (void) texDrawFunc: (id) id_X;
-- (void) renderTestQuadWithTexture: (GLuint) texID;
+- (void) texDrawFunc:               (id)        id_X;
+- (void) renderTestQuadWithTexture: (GLuint)    texID;
 
-@property (nonatomic, retain) Program*          program;
+@property (retain) Program* program;
 
 @end
 
@@ -30,8 +30,8 @@
 
 @synthesize program;
         
-#define bytesForStructMember(STRUCT, MEMBER) sizeof( ((STRUCT *)NULL)->MEMBER )
-#define glFloatsFor(STRUCT, MEMBER) bytesForStructMember( STRUCT, MEMBER ) / sizeof( GLfloat )
+//#define bytesForStructMember(STRUCT, MEMBER) sizeof( ((STRUCT *)NULL)->MEMBER )
+//#define glFloatsFor(STRUCT, MEMBER) bytesForStructMember( STRUCT, MEMBER ) / sizeof( GLfloat )
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -136,7 +136,7 @@
     
     self.program = [Program program];
     
-    [program setupProgramWithShader: @"Shader"
+    [program setupProgramWithShader: @"SimpleTexture"
                          attributes: atts
                            uniforms: unifs ];
     
@@ -195,14 +195,10 @@
 
 #define ROTATE YES
 - (void) willRender
-{
-    glLogAndFlushErrors();
-    
+{    
 	// clear the COLOR buffer,
 	glClearColor(0.0f, 0.0f, 0.1f, 1.0f);
     glClear( GL_COLOR_BUFFER_BIT );
-
-    glLogAndFlushErrors();
 	
     // MV*P matrix
     {

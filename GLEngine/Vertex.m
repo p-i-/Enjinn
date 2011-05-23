@@ -14,7 +14,7 @@
 @implementation Vertex
 
 + (void) setupVertexArrayPointers: ( ATTRIBUTE [] ) in_attributeArray
-               returningVertBufId: (GLuint *)       pIdVertBuf
+               returningVertBufId: (GLuint *)       p_id_vertBuf
 {
     // NOTE: *Must* do: glBindBuffer( GL_ARRAY_BUFFER, tqVert_BufID ); 
     //       before glEnableVertexAttribArray(...) and glVertexAttribPointer(...)  
@@ -22,9 +22,8 @@
     
     LOG( @"GLView: setupVertexArrayPointers:" );
     
-    //GLuint tqVert_BufID;
-    glGenBuffers( 1, pIdVertBuf /*& tqVert_BufID*/ ); 
-    glBindBuffer( GL_ARRAY_BUFFER, * pIdVertBuf /*& tqVert_BufID*/ ); 
+    glGenBuffers( 1, p_id_vertBuf ); 
+    glBindBuffer( GL_ARRAY_BUFFER, * p_id_vertBuf ); 
     
     int attribBytesTotal, attribCount;
     {

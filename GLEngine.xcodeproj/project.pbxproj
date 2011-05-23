@@ -25,13 +25,18 @@
 		A309BBF2138158F400E8E748 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BBF1138158F400E8E748 /* OpenGLES.framework */; };
 		A31C35F213828D2500ADFC89 /* PiLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A31C35F113828D2300ADFC89 /* PiLog.m */; };
 		A33A5A06138579EC00275FA0 /* GLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = A33A5A05138579EC00275FA0 /* GLTexture.m */; };
-		A37BB1CD13862B3F00BB0821 /* gem_glow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1CB13862B3F00BB0821 /* gem_glow.jpg */; };
+		A37BB1CD13862B3F00BB0821 /* sparkle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1CB13862B3F00BB0821 /* sparkle.jpg */; };
 		A37BB1CE13862B3F00BB0821 /* gem.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1CC13862B3F00BB0821 /* gem.jpg */; };
 		A37BB1DC1386479400BB0821 /* Blurrer.m in Sources */ = {isa = PBXBuildFile; fileRef = A37BB1DB1386479400BB0821 /* Blurrer.m */; };
 		A37F3193138782100022D880 /* Blurrer.vert in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1E913865C5600BB0821 /* Blurrer.vert */; };
 		A37F3194138782100022D880 /* Blurrer.frag in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1E813865C5600BB0821 /* Blurrer.frag */; };
 		A37F319813879A9F0022D880 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = A37F319713879A9F0022D880 /* Vertex.m */; };
 		A3B33B23138944520094580A /* Common Mistakes - OpenGL.org.webloc in Resources */ = {isa = PBXBuildFile; fileRef = A3B33B22138944520094580A /* Common Mistakes - OpenGL.org.webloc */; };
+		A3C351261389580E00B8F209 /* SimpleTexture.vert in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1C813862B2B00BB0821 /* SimpleTexture.vert */; };
+		A3C351271389580E00B8F209 /* SimpleTexture.frag in Resources */ = {isa = PBXBuildFile; fileRef = A37BB1C713862B2B00BB0821 /* SimpleTexture.frag */; };
+		A3C3512A13895A0300B8F209 /* GemGlow.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C3512913895A0300B8F209 /* GemGlow.m */; };
+		A3C3513A138962DB00B8F209 /* GemGlow.vert in Resources */ = {isa = PBXBuildFile; fileRef = A3C3513513895AD400B8F209 /* GemGlow.vert */; };
+		A3C3513B138962DB00B8F209 /* GemGlow.frag in Resources */ = {isa = PBXBuildFile; fileRef = A3C3513613895AD400B8F209 /* GemGlow.frag */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,10 +71,10 @@
 		A31C35F113828D2300ADFC89 /* PiLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiLog.m; sourceTree = "<group>"; };
 		A33A5A04138579EC00275FA0 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
 		A33A5A05138579EC00275FA0 /* GLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTexture.m; sourceTree = "<group>"; };
-		A37BB1C713862B2B00BB0821 /* Shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.frag; path = Resources/Shader.frag; sourceTree = "<group>"; };
-		A37BB1C813862B2B00BB0821 /* Shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vert; path = Resources/Shader.vert; sourceTree = "<group>"; };
-		A37BB1CB13862B3F00BB0821 /* gem_glow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gem_glow.jpg; path = Resources/gem_glow.jpg; sourceTree = "<group>"; };
-		A37BB1CC13862B3F00BB0821 /* gem.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gem.jpg; path = Resources/gem.jpg; sourceTree = "<group>"; };
+		A37BB1C713862B2B00BB0821 /* SimpleTexture.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SimpleTexture.frag; path = ../Resources/SimpleTexture.frag; sourceTree = "<group>"; };
+		A37BB1C813862B2B00BB0821 /* SimpleTexture.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SimpleTexture.vert; path = ../Resources/SimpleTexture.vert; sourceTree = "<group>"; };
+		A37BB1CB13862B3F00BB0821 /* sparkle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sparkle.jpg; path = ../Resources/sparkle.jpg; sourceTree = "<group>"; };
+		A37BB1CC13862B3F00BB0821 /* gem.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gem.jpg; path = ../Resources/gem.jpg; sourceTree = "<group>"; };
 		A37BB1D71386407F00BB0821 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		A37BB1DA1386479300BB0821 /* Blurrer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blurrer.h; sourceTree = "<group>"; };
 		A37BB1DB1386479400BB0821 /* Blurrer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Blurrer.m; sourceTree = "<group>"; };
@@ -78,6 +83,10 @@
 		A37F319613879A9F0022D880 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		A37F319713879A9F0022D880 /* Vertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
 		A3B33B22138944520094580A /* Common Mistakes - OpenGL.org.webloc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Common Mistakes - OpenGL.org.webloc"; sourceTree = "<group>"; };
+		A3C3512813895A0300B8F209 /* GemGlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GemGlow.h; sourceTree = "<group>"; };
+		A3C3512913895A0300B8F209 /* GemGlow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GemGlow.m; sourceTree = "<group>"; };
+		A3C3513513895AD400B8F209 /* GemGlow.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = GemGlow.vert; sourceTree = "<group>"; };
+		A3C3513613895AD400B8F209 /* GemGlow.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = GemGlow.frag; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +141,9 @@
 				A31C35EE1382808200ADFC89 /* BoilerPlate */,
 				A309BBB713814C7700E8E748 /* CustomGLView.h */,
 				A309BBB813814C7700E8E748 /* CustomGLView.m */,
+				A37BB1C813862B2B00BB0821 /* SimpleTexture.vert */,
+				A37BB1C713862B2B00BB0821 /* SimpleTexture.frag */,
+				A3C3513913895EDF00B8F209 /* GemGlow */,
 				A309BBC61381520300E8E748 /* Lib */,
 			);
 			path = GLEngine;
@@ -210,9 +222,9 @@
 				A309BBC41381502600E8E748 /* GLView */,
 				A33A5A04138579EC00275FA0 /* GLTexture.h */,
 				A33A5A05138579EC00275FA0 /* GLTexture.m */,
-				A37BB1E713865C0900BB0821 /* Blurrer */,
 				A37F319613879A9F0022D880 /* Vertex.h */,
 				A37F319713879A9F0022D880 /* Vertex.m */,
+				A37BB1E713865C0900BB0821 /* Blurrer */,
 			);
 			name = GL;
 			sourceTree = "<group>";
@@ -222,10 +234,6 @@
 			children = (
 				A309BB9F13814C0600E8E748 /* GLEngine-Info.plist */,
 				A309BBA013814C0600E8E748 /* InfoPlist.strings */,
-				A37BB1C813862B2B00BB0821 /* Shader.vert */,
-				A37BB1C713862B2B00BB0821 /* Shader.frag */,
-				A37BB1CB13862B3F00BB0821 /* gem_glow.jpg */,
-				A37BB1CC13862B3F00BB0821 /* gem.jpg */,
 				A309BBF7138159A900E8E748 /* Shaders */,
 			);
 			name = Resources;
@@ -240,6 +248,19 @@
 				A37BB1E813865C5600BB0821 /* Blurrer.frag */,
 			);
 			name = Blurrer;
+			sourceTree = "<group>";
+		};
+		A3C3513913895EDF00B8F209 /* GemGlow */ = {
+			isa = PBXGroup;
+			children = (
+				A3C3512813895A0300B8F209 /* GemGlow.h */,
+				A3C3512913895A0300B8F209 /* GemGlow.m */,
+				A3C3513513895AD400B8F209 /* GemGlow.vert */,
+				A3C3513613895AD400B8F209 /* GemGlow.frag */,
+				A37BB1CC13862B3F00BB0821 /* gem.jpg */,
+				A37BB1CB13862B3F00BB0821 /* sparkle.jpg */,
+			);
+			name = GemGlow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,12 +313,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3C3513A138962DB00B8F209 /* GemGlow.vert in Resources */,
+				A3C3513B138962DB00B8F209 /* GemGlow.frag in Resources */,
+				A3C351261389580E00B8F209 /* SimpleTexture.vert in Resources */,
+				A3C351271389580E00B8F209 /* SimpleTexture.frag in Resources */,
 				A37F3193138782100022D880 /* Blurrer.vert in Resources */,
 				A37F3194138782100022D880 /* Blurrer.frag in Resources */,
 				A309BBA213814C0600E8E748 /* InfoPlist.strings in Resources */,
 				A309BBAB13814C0600E8E748 /* MainWindow.xib in Resources */,
 				A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */,
-				A37BB1CD13862B3F00BB0821 /* gem_glow.jpg in Resources */,
+				A37BB1CD13862B3F00BB0821 /* sparkle.jpg in Resources */,
 				A37BB1CE13862B3F00BB0821 /* gem.jpg in Resources */,
 				A3B33B23138944520094580A /* Common Mistakes - OpenGL.org.webloc in Resources */,
 			);
@@ -322,6 +347,7 @@
 				A33A5A06138579EC00275FA0 /* GLTexture.m in Sources */,
 				A37BB1DC1386479400BB0821 /* Blurrer.m in Sources */,
 				A37F319813879A9F0022D880 /* Vertex.m in Sources */,
+				A3C3512A13895A0300B8F209 /* GemGlow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

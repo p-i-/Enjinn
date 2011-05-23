@@ -7,7 +7,7 @@
 //
 
 #import "GLViewBits.h" // renderProtocol, ATTRIBUTE
-#import "Vertex.h"
+//#import "Vertex.h"
 
 @class Program;
 @class EAGLContext;
