@@ -140,7 +140,7 @@
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     
 	// clear the COLOR buffer,
-	glClearColor(0.0f, 0.0f, 0.1f, 1.0f);
+	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
     glClear( GL_COLOR_BUFFER_BIT );
 	
     // MV*P matrix
@@ -176,13 +176,13 @@
 #define  PULSE  YES
 - (void) renderQuad
 {
+    float s = 1.f;
     VERTEX_XY_ST_RGBA testQuad[4] = 
     {
-        //  X   Y    S  T    R  G  B  A
-        {.xy = {-.5, -.5}, .st = {0, 0}, .rgba = {0, 0, 1, 1} },
-        {.xy = { .5, -.5}, .st = {1, 0}, .rgba = {1, 0, 0, 1} },
-        {.xy = { .5,  .5}, .st = {1, 1}, .rgba = {1, 0, 0, 1} },
-        {.xy = {-.5,  .5}, .st = {0, 1}, .rgba = {1, 0, 0, 1} },
+        {.xy = {-s, -s}, .st = {0, 0}, .rgba = {0, 0, 1, 1} },
+        {.xy = { s, -s}, .st = {1, 0}, .rgba = {1, 0, 0, 1} },
+        {.xy = { s,  s}, .st = {1, 1}, .rgba = {1, 0, 0, 1} },
+        {.xy = {-s,  s}, .st = {0, 1}, .rgba = {1, 0, 0, 1} },
     };
     
     glBufferData( GL_ARRAY_BUFFER, sizeof( testQuad ), testQuad, GL_STATIC_DRAW );               
@@ -192,7 +192,7 @@
     
     
     
-    static float f = 0.f;
+    static float f = M_PI; //  / 2.f;
     if (PULSE)
         f+=.02;
     float glowFac = (sin(f)+ 1.) / 2.;
