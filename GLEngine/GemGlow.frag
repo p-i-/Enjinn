@@ -16,6 +16,7 @@ precision mediump float;
 // gem from: http://www.turbosquid.com/FullPreview/Index.cfm/ID/253657
 // blue & green: http://www.turbosquid.com/FullPreview/Index.cfm/ID/477361
 // many cuts: http://www.turbosquid.com/FullPreview/Index.cfm?id=547841
+// FREE: http://www.turbosquid.com/FullPreview/Index.cfm/ID/554455
 
 uniform lowp sampler2D U1_sampId_Gem;             
 uniform lowp sampler2D U2_sampId_Sparkle;             
@@ -28,9 +29,19 @@ varying mediump	vec4 V1_color_RGBA;
 
 void main( void )                       
 {    
-    float gem       = texture2D(  U1_sampId_Gem,      V0_texture_ST ).a;
-    float sparkle   = texture2D(  U2_sampId_Sparkle,  V0_texture_ST ).a;
+    float GEM       = texture2D( U1_sampId_Gem,     V0_texture_ST ).a;
+    float SPARKLE   = texture2D( U2_sampId_Sparkle, V0_texture_ST ).a;
     
+    float FAC       = SPARKLE * U3_glowFactor  +  GEM * ( 1. - U3_glowFactor ) ;
+    
+    // WORKS NICELY
+    gl_FragColor.rgb = V1_color_RGBA.rgb * FAC  +  .4 * SPARKLE * U3_glowFactor ;
+    gl_FragColor.a  = ( SPARKLE > 0.03 ) ? 1. : 0.;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
     //sparkle *= U3_glowFactor;
     
     //sparkle = .5;
@@ -47,7 +58,7 @@ void main( void )
 //    float alph = 1.;
 //    
 //    // interpolate between "if not-glowing, fac = gem" & "if glowing, fac = sparkle"
-    float fac = sparkle * U3_glowFactor  +  gem * ( 1. - U3_glowFactor ) ;
+//    float fac = sparkle * U3_glowFactor  +  gem * ( 1. - U3_glowFactor ) ;
 //    rgb *= fac;
 //    
 //    // move gem colour towards white everywhere it sparkles (move more, the more it is glowing)
@@ -56,11 +67,11 @@ void main( void )
 //    // solid fill i.e. totally opaque
 //    alph = 1.;
     
-#define THRESH .03
-    
-    // WORKS NICELY
-    gl_FragColor.rgb = V1_color_RGBA.rgb * fac  +  .4 * sparkle * U3_glowFactor;
-    gl_FragColor.a  = (/*gem > THRESH || */ sparkle > THRESH) ? 1. : 0.;
+//#define THRESH .03
+//    
+//    // WORKS NICELY
+//    gl_FragColor.rgb = V1_color_RGBA.rgb * fac  +  .4 * sparkle * U3_glowFactor;
+//    gl_FragColor.a  = (/*gem > THRESH || */ sparkle > THRESH) ? 1. : 0.;
     
     //    // bleh
 //    if (fac > THRESH)
@@ -73,8 +84,8 @@ void main( void )
 //        gl_FragColor.rgb = V1_color_RGBA.rgb  +  .4 * sparkle * U3_glowFactor;
 //        gl_FragColor.a  = fac;
 //    }
-}
-
+//}
+//
 //void main( void )                       
 //{    
 //    float gem       = texture2D(  U1_sampId_Gem,      V0_texture_ST ).a;
