@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EF2916E1A9FDE7B009F9DAA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF2916D1A9FDE7B009F9DAA /* Default-568h@2x.png */; };
 		A309BB9813814C0600E8E748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BB9713814C0600E8E748 /* UIKit.framework */; };
 		A309BB9A13814C0600E8E748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BB9913814C0600E8E748 /* Foundation.framework */; };
 		A309BB9C13814C0600E8E748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A309BB9B13814C0600E8E748 /* CoreGraphics.framework */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EF2916D1A9FDE7B009F9DAA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A309BB9313814C0600E8E748 /* GLEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A309BB9713814C0600E8E748 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A309BB9913814C0600E8E748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +110,7 @@
 		A309BB8813814C0500E8E748 = {
 			isa = PBXGroup;
 			children = (
+				0EF2916D1A9FDE7B009F9DAA /* Default-568h@2x.png */,
 				A37BB1D71386407F00BB0821 /* README */,
 				A3B33B22138944520094580A /* Common Mistakes - OpenGL.org.webloc */,
 				A309BB9D13814C0600E8E748 /* GLEngine */,
@@ -289,6 +292,7 @@
 		A309BB8A13814C0500E8E748 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Pi;
 			};
 			buildConfigurationList = A309BB8D13814C0500E8E748 /* Build configuration list for PBXProject "GLEngine" */;
@@ -322,6 +326,7 @@
 				A309BBA213814C0600E8E748 /* InfoPlist.strings in Resources */,
 				A309BBAB13814C0600E8E748 /* MainWindow.xib in Resources */,
 				A309BBB113814C0600E8E748 /* GLEngineViewController.xib in Resources */,
+				0EF2916E1A9FDE7B009F9DAA /* Default-568h@2x.png in Resources */,
 				A37BB1CD13862B3F00BB0821 /* sparkle.jpg in Resources */,
 				A37BB1CE13862B3F00BB0821 /* gem.jpg in Resources */,
 				A3B33B23138944520094580A /* Common Mistakes - OpenGL.org.webloc in Resources */,
@@ -385,16 +390,28 @@
 		A309BBB213814C0600E8E748 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -402,11 +419,22 @@
 		A309BBB313814C0600E8E748 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

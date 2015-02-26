@@ -81,7 +81,8 @@
                                   8,                     // bitsPerComponent
                                   bytesPerRow, 
                                   NULL,                  // colorSpace
-                                  kCGImageAlphaOnly);
+                                  (CGBitmapInfo)kCGImageAlphaOnly
+                                  );
         
         // (2) http://iphone-3d-programming.labs.oreilly.com/ch05.html#fig-TexelMapping
         // ...the spec also says that, when uploading an image with glTexImage2D, 
@@ -181,7 +182,7 @@
         // create a context with RGBA pixels
         X_RGBA = CGBitmapContextCreate( (void *)pixels, dest_W, dest_H, 
                                        bitsPerComponent, bytesPerRow, 
-                                       colorSpace, kCGImageAlphaNoneSkipLast
+                                       colorSpace, (CGBitmapInfo)kCGImageAlphaNoneSkipLast
                                        );        
         assert(X_RGBA);
         
@@ -212,7 +213,7 @@
     {
         for(int x = 0; x < dest_W; x++) 
         {
-            int N = y * dest_W + x;
+            int N = y * (int)dest_W + x;
             
             RGBA pix = pixels[ N ];
             

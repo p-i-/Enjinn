@@ -57,7 +57,7 @@
                                   GL_FLOAT,                         // type of each components
                                   GL_FALSE,                         // normalized?
                                   attribBytesTotal,                 // stride (bytes)
-                                  (const GLvoid *)  pA->byteOffset  // byte-offset within struct
+                                  (const GLvoid *)NULL + pA->byteOffset  // byte-offset within struct
                                   );
         }
         

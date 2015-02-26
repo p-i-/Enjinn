@@ -127,7 +127,8 @@
     
     unifs = ( char* [] )
     {
-        "U0_glMVPMatrix", 
+        "U0_glMVPMatrix",
+        END_OF_UNIFORMS
     };
     
     // this is a GLView method
@@ -251,7 +252,7 @@
     glActiveTexture( GL_TEXTURE0 );
     glBindTexture( GL_TEXTURE_2D, texID );
     
-    if (1)
+    if ((1))
     {
         glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, quadIndices );
     }

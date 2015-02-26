@@ -199,7 +199,7 @@
     glUniform1f( [ program uniformId: U3_GLOWFACTOR ], glowFac );   
 
     
-    if (1)
+    if ((1))
     {
         glDrawElements( GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_SHORT, quadIndices );
     }

@@ -78,7 +78,7 @@
         // actually allocate memory for this texture
         GLuint pixCount = W * H;
         
-        typedef struct { uint8_t r, g, b, a } rgba;
+        typedef struct { uint8_t r, g, b, a; } rgba;
         
         rgba * alphas = calloc( pixCount, sizeof( rgba ) );
         
@@ -156,7 +156,7 @@
             "U0_glMVPMatrix", 
             "U1_srcTexture", 
             "U2_blurSize", 
-            NULL
+            END_OF_UNIFORMS
         };
         
         

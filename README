@@ -1,2 +1,9 @@
 GL ES2 engine by [Pi], inspired by GLYoda (aka Max Rupp)'s web.cecs.pdx.edu/~feelgood/Source/FBO.c
 
+change:
+    DEMO demo = demo_RenderTexturedQuad_TexFromImage;
+
+in CustomGLView.h to get 4 different demos.
+
+
+In GLEngineViewController.xib change "Custom Class" from CustomGLView to GemGlow to get another.
